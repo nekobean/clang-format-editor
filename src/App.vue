@@ -1,60 +1,28 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    <v-app-bar app color="primary" dark>
+      <h1>Clang Format Editor (Clang 12) version 0.2.0</h1>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <ClangFormatEditor />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import ClangFormatEditor from "./components/ClangFormatEditor";
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
+  name: "App",
+  metaInfo: {
+    title: "Clang Format Editor (compatible with Clang 12)",
+    titleTemplate: "%s - pystyle"
   },
 
-  data: () => ({
-    //
-  }),
+  components: {
+    ClangFormatEditor
+  },
+  data: () => ({})
 };
 </script>

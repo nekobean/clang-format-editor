@@ -1,0 +1,1474 @@
+[
+    {
+        "name": "BasedOnStyle",
+        "type": "enum",
+        "description": "\u660e\u793a\u7684\u306b\u6307\u5b9a\u3055\u308c\u3066\u3044\u306a\u3044\u8a2d\u5b9a\u9805\u76ee\u306b\u9069\u7528\u3055\u308c\u308b\u30b9\u30bf\u30a4\u30eb\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u3053\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u306f <strong>clang-format</strong> \u8a2d\u5b9a\u3067\u306e\u307f\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u307e\u3059 (<code>-style='{...}'</code> \u3067\u306e\u6307\u5b9a\u3001\u307e\u305f\u306f <code>.clang-format</code> \u30d5\u30a1\u30a4\u30eb\u3067\u306e\u6307\u5b9a)\u3002",
+        "enums": [
+            {
+                "name": "LLVM",
+                "description": "<a href=\"https://llvm.org/docs/CodingStandards.html\">LLVM coding standards</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "Google",
+                "description": "<a href=\"https://google.github.io/styleguide/cppguide.html\">Google\u2019s C++ style guide</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "Chromium",
+                "description": "<a href=\"https://chromium.googlesource.com/chromium/src/+/master/styleguide/styleguide.md\">Chromium\u2019s style guide</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "Mozilla",
+                "description": "<a href=\"https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style\">Mozilla\u2019s style guide</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "WebKit",
+                "description": "<a href=\"https://www.webkit.org/coding/coding-style.html\">WebKit\u2019s style guide</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "Microsoft",
+                "description": "<a href=\"https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference?view=vs-2017\">Microsoft\u2019s style guide</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            },
+            {
+                "name": "GNU",
+                "description": "<a href=\"https://www.gnu.org/prep/standards/standards.html\">GNU coding standards</a> \u306b\u6e96\u62e0\u3057\u305f\u30b9\u30bf\u30a4\u30eb\u3002"
+            }
+        ],
+        "category": "Common",
+        "index": 0
+    },
+    {
+        "name": "AccessModifierOffset",
+        "type": "int",
+        "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u8ffd\u52a0\u306e\u30a4\u30f3\u30c7\u30f3\u30c8/\u30a2\u30a6\u30c8\u30c7\u30f3\u30c8\u5e45\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u5e45\u306f\u3001<code>IndentWidth + AccessModifierOffset</code> \u3067\u8a08\u7b97\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// IndentWidth: 4, AccessModifierOffset: 0\n// IndentWidth + AccessModifierOffset = 4 \u304c\u30a4\u30f3\u30c7\u30f3\u30c8\u5e45\u3068\u306a\u308b\u3002\nclass MyClass {\n    public:\n    MyClass();\n    ~MyClass();\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>// IndentWidth: 4, AccessModifierOffset: -2\n// IndentWidth + AccessModifierOffset = 2 \u304c\u30a4\u30f3\u30c7\u30f3\u30c8\u5e45\u3068\u306a\u308b\nclass MyClass {\n  public:\n    MyClass();\n    ~MyClass();\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>// IndentWidth: 4, AccessModifierOffset: -4\n// IndentWidth + AccessModifierOffset = 0 \u304c\u30a4\u30f3\u30c7\u30f3\u30c8\u5e45\u3068\u306a\u308b\nclass MyClass {\npublic:\n    MyClass();\n    ~MyClass();\n}</code></pre>",
+        "category": "Indent",
+        "index": 3
+    },
+    {
+        "name": "AlignAfterOpenBracket",
+        "type": "enum",
+        "description": "1\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001\u958b\u59cb\u62ec\u5f27\u306e\u76f4\u5f8c\u3067\u5f15\u6570\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u3053\u308c\u306f\u3001\u4e38\u62ec\u5f27\u3001\u5c71\u62ec\u5f27\u3001\u89d2\u62ec\u5f27\u306b\u9069\u7528\u3055\u308c\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Align",
+                "description": "\u958b\u59cb\u62ec\u5f27\u306e\u5f8c\u306b\u63c3\u3048\u3066\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void function(int parameter1,\n              int parameter2,\n              int parameter3);</code></pre>"
+            },
+            {
+                "name": "DontAlign",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002\u6b21\u306e\u884c\u306f <code>ContinuationIndentWidth</code> \u5206\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void function(int parameter1,\n    int parameter2, int parameter3);</code></pre>"
+            },
+            {
+                "name": "AlwaysBreak",
+                "description": "\u5e38\u306b\u958b\u59cb\u62ec\u5f27\u306e\u5f8c\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void function(\n    int parameter1, int parameter2,\n    int parameter3);</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 0
+    },
+    {
+        "name": "AlignConsecutiveAssignments",
+        "type": "enum",
+        "description": "\u8907\u6570\u884c\u9023\u7d9a\u3057\u3066\u3044\u308b\u4ee3\u5165\u6f14\u7b97\u5b50\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int a            = 1;\nint somelongname = 2;\ndouble c         = 3;</code></pre>",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002"
+            },
+            {
+                "name": "Consecutive",
+                "description": "\u9023\u7d9a\u3057\u305f\u4ee3\u5165\u6f14\u7b97\u5b50\u306f\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int a            = 1;\nint somelongname = 2;\ndouble c         = 3;\n\nint d = 3;\n/* A comment. */\ndouble e = 4;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLines",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int a            = 1;\nint somelongname = 2;\ndouble c         = 3;\n\nint d            = 3;\n/* A comment. */\ndouble e = 4;</code></pre>"
+            },
+            {
+                "name": "AcrossComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int a            = 1;\nint somelongname = 2;\ndouble c         = 3;\n\nint d    = 3;\n/* A comment. */\ndouble e = 4;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLinesAndComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u53ca\u3073\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int a            = 1;\nint somelongname = 2;\ndouble c         = 3;\n\nint d            = 3;\n/* A comment. */\ndouble e         = 4;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 1
+    },
+    {
+        "name": "AlignConsecutiveBitFields",
+        "type": "enum",
+        "description": "\u9023\u7d9a\u3057\u305f\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002"
+            },
+            {
+                "name": "Consecutive",
+                "description": "\u9023\u7d9a\u3057\u305f\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306f\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int aaaa : 1;\nint b    : 12;\nint ccc  : 8;\n\nint d : 2;\n/* A comment. */\nint ee : 3;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLines",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int aaaa : 1;\nint b    : 12;\nint ccc  : 8;\n\nint d    : 2;\n/* A comment. */\nint ee : 3;</code></pre>"
+            },
+            {
+                "name": "AcrossComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int aaaa : 1;\nint b    : 12;\nint ccc  : 8;\n\nint d  : 2;\n/* A comment. */\nint ee : 3;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLinesAndComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u53ca\u3073\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int aaaa : 1;\nint b    : 12;\nint ccc  : 8;\n\nint d    : 2;\n/* A comment. */\nint ee   : 3;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 2
+    },
+    {
+        "name": "AlignConsecutiveDeclarations",
+        "type": "enum",
+        "description": "\u9023\u7d9a\u3057\u305f\u5ba3\u8a00\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002"
+            },
+            {
+                "name": "Consecutive",
+                "description": "\u9023\u7d9a\u3057\u305f\u5ba3\u8a00\u306f\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int         aaaa = 12;\nfloat       b = 23;\nstd::string ccc;\n\nint         a = 42;\n/* A comment. */\nbool c = false;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLines",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int         aaaa = 12;\nfloat       b = 23;\nstd::string ccc;\n\nint         a = 42;\n/* A comment. */\nbool c = false;</code></pre>"
+            },
+            {
+                "name": "AcrossComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int         aaaa = 12;\nfloat       b = 23;\nstd::string ccc;\n\nint  a = 42;\n/* A comment. */\nbool c = false;</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLinesAndComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u53ca\u3073\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int         aaaa = 12;\nfloat       b = 23;\nstd::string ccc;\n\nint         a = 42;\n/* A comment. */\nbool        c = false;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 3
+    },
+    {
+        "name": "AlignConsecutiveMacros",
+        "type": "enum",
+        "description": "\u9023\u7d9a\u3057\u305f\u30de\u30af\u30ed\u5b9a\u7fa9\u3092\u6574\u5217\u3055\u305b\u308b\u30b9\u30bf\u30a4\u30eb\u3002<code>\u9023\u7d9a</code>\u306f\u3001\u6b21\u306e\u3088\u3046\u306a\u66f8\u5f0f\u306b\u306a\u308a\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#\u5b9a\u7fa9\u3055\u308c\u305fSHORT_NAME 42\n#0x007f\n#define EVEN_LONGER_NAME (2)\n#define foo(x) (x * x)\n#define bar(y, z) (y + z)</code></pre>",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u9023\u7d9a\u3057\u305f\u30de\u30af\u30ed\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "Consecutive",
+                "description": "\u9023\u7d9a\u3057\u305f\u30de\u30af\u30ed\u306f\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define SHORT_NAME       42\n#define LONGER_NAME      0x007f\n#define EVEN_LONGER_NAME (2)\n\n#define foo(x) (x * x)\n/* some comment */\n#define bar(y, z) (y + z)</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLines",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define SHORT_NAME       42\n#define LONGER_NAME      0x007f\n#define EVEN_LONGER_NAME (2)\n\n#define foo(x)           (x * x)\n/* some comment */\n#define bar(y, z) (y + z)</code></pre>"
+            },
+            {
+                "name": "AcrossComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define SHORT_NAME       42\n#define LONGER_NAME      0x007f\n#define EVEN_LONGER_NAME (2)\n\n#define foo(x)    (x * x)\n/* some comment */\n#define bar(y, z) (y + z)</code></pre>"
+            },
+            {
+                "name": "AcrossEmptyLinesAndComments",
+                "description": "<code>Consecutive</code> \u3068\u540c\u3058\u3067\u3059\u304c\u3001\u7a7a\u884c\u53ca\u3073\u30b3\u30e1\u30f3\u30c8\u306e\u307f\u306e\u884c\u3082\u8de8\u3044\u3067\u9069\u7528\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define SHORT_NAME       42\n#define LONGER_NAME      0x007f\n#define EVEN_LONGER_NAME (2)\n\n#define foo(x)           (x * x)\n/* some comment */\n#define bar(y, z)        (y + z)</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 4
+    },
+    {
+        "name": "AlignEscapedNewlines",
+        "type": "enum",
+        "description": "\u6539\u884c\u30a8\u30b9\u30b1\u30fc\u30d7\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "DontAlign",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>#define DEFINE_ABC \\\n    int a; \\\n    int b; \\\n    int c;</code></pre>"
+            },
+            {
+                "name": "Left",
+                "description": "\u6539\u884c\u30a8\u30b9\u30b1\u30fc\u30d7\u306f\u53ef\u80fd\u306a\u4e00\u756a\u5de6\u306e\u4f4d\u7f6e\u3067\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define DEFINE_ABC \\\n    int a;         \\\n    int b;         \\\n    int c;</code></pre>"
+            },
+            {
+                "name": "Right",
+                "description": "\u6539\u884c\u30a8\u30b9\u30b1\u30fc\u30d7\u306f\u53ef\u80fd\u306a\u4e00\u756a\u53f3\u306e\u4f4d\u7f6e\u3067\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#define DEFINE_ABC                     \\\n  int a;                               \\\n  int b;                               \\\n  int c;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 5
+    },
+    {
+        "name": "AlignOperands",
+        "type": "enum",
+        "description": "1\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001\u4e8c\u9805\u6f14\u7b97\u3001\u4e09\u9805\u6f14\u7b97\u306e\u88ab\u6f14\u7b97\u5b50\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "DontAlign",
+                "description": "\u6574\u5217\u3057\u307e\u305b\u3093\u3002\u6b21\u306e\u884c\u306f <code>ContinuationIndentWidth</code> \u5206\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "Align",
+                "description": "\u4e8c\u9805\u6f14\u7b97\u3001\u4e09\u9805\u6f14\u7b97\u306e\u88ab\u6f14\u7b97\u5b50\u306f\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int var = loooooooooongNameValue1 +\n          loooooooooongNameValue2;</code></pre>\n\n<code>BreakBeforeBinaryOperators</code> \u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3001\u6539\u884c\u3055\u308c\u305f\u6f14\u7b97\u5b50\u306f1\u884c\u76ee\u306e\u88ab\u6f14\u7b97\u5b50\u306b\u6574\u5217\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int var = loooooooooongNameValue1\n          + loooooooooongNameValue2;</code></pre>"
+            },
+            {
+                "name": "AlignAfterOperator",
+                "description": "\u4e8c\u9805\u6f14\u7b97\u3001\u4e09\u9805\u6f14\u7b97\u306e\u88ab\u6f14\u7b97\u5b50\u306f\u6574\u5217\u3057\u307e\u3059\u3002<code>Align</code> \u3068\u4f3c\u3066\u3044\u307e\u3059\u304c\u3001<code>BreakBeforeBinaryOperators</code> \u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u306f\u3001\u6539\u884c\u3055\u308c\u305f\u6f14\u7b97\u5b50\u306f1\u884c\u76ee\u306e\u6f14\u7b97\u5b50\u306b\u6574\u5217\u3055\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int var = loooooooooongNameValue1\n        + loooooooooongNameValue2;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 6
+    },
+    {
+        "name": "AlignTrailingComments",
+        "type": "bool",
+        "description": "\u8907\u6570\u884c\u9023\u7d9a\u3057\u3066\u3044\u308b\u672b\u5c3e\u306e\u30b3\u30e1\u30f3\u30c8\u3092\u6574\u5217\u3055\u305b\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>int var1 = 1;    // comment\ndouble var2 = 2; // comment</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>int var1 = 1; // comment\ndouble var2 = 2; // comment</code></pre>",
+        "category": "Align",
+        "index": 7
+    },
+    {
+        "name": "AllowAllArgumentsOnNextLine",
+        "type": "bool",
+        "description": "\u95a2\u6570\u547c\u3073\u51fa\u3057\u3084\u521d\u671f\u5316\u5b50\u30ea\u30b9\u30c8\u304c\u30011\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001<code>BinPackArguments</code> \u304c <code>false</code> \u3067\u3042\u3063\u3066\u3082\u3001\u6539\u884c\u3059\u308c\u3070\u3059\u3079\u3066\u306e\u5f15\u6570\u304c\u30011\u884c\u306b\u53ce\u307e\u308b\u5834\u5408\u306f\u3001\u6b21\u306e\u884c\u306b\u914d\u7f6e\u3059\u308b\u3053\u3068\u3092\u8a31\u53ef\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>// BinPackArguments: false\n// AllowAllArgumentsOnNextLine: true\ncallFunction(\n    a, b, c, d);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>// BinPackArguments: false\n// AllowAllArgumentsOnNextLine: false\ncallFunction(a,\n             b,\n             c,\n             d);</code></pre>",
+        "category": "Break",
+        "index": 0
+    },
+    {
+        "name": "AllowAllConstructorInitializersOnNextLine",
+        "type": "bool",
+        "description": "\u30e1\u30f3\u30d0\u521d\u671f\u5316\u5b50\u30ea\u30b9\u30c8\u3092\u6301\u3064\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf\u306e\u5b9a\u7fa9\u304c\u30011\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001<code>ConstructorInitializerAllOnOneLineOrOnePerLine</code> \u304c <code>true</code> \u3067\u3042\u3063\u3066\u3082\u3001\u6539\u884c\u3059\u308c\u3070\u3059\u3079\u3066\u306e\u30e1\u30f3\u30d0\u521d\u671f\u5316\u5b50\u30ea\u30b9\u30c8\u304c1\u884c\u306b\u53ce\u307e\u308b\u5834\u5408\u306f\u3001\u6b21\u306e\u884c\u306b\u914d\u7f6e\u3059\u308b\u3053\u3068\u3092\u8a31\u53ef\u3057\u307e\u3059\u3002\n<code>ConstructorInitializerAllOnOneLineOrOnePerLine</code> \u304c <code>false</code> \u306e\u5834\u5408\u306f\u3001\u3053\u306e\u8a2d\u5b9a\u306f\u4f55\u3082\u5f71\u97ff\u3092\u4e0e\u3048\u307e\u305b\u3093\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>// ConstructorInitializerAllOnOneLineOrOnePerLine: true\n// AllowAllConstructorInitializersOnNextLine: true\nMyClass::MyClass()\n    : member0(0), member1(2) {}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>// ConstructorInitializerAllOnOneLineOrOnePerLine: true\n// AllowAllConstructorInitializersOnNextLine: false\nMyClass::MyClass()\n    : member0(0),\n      member1(2) {}</code></pre>",
+        "category": "Break",
+        "index": 2
+    },
+    {
+        "name": "AllowAllParametersOfDeclarationOnNextLine",
+        "type": "bool",
+        "description": "\n\u95a2\u6570\u5ba3\u8a00\u306e\u5f15\u6570\u304c\u30011\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001<code>BinPackParameters</code> \u304c <code>false</code> \u3067\u3042\u3063\u3066\u3082\u3001\u6539\u884c\u3059\u308c\u3070\u3059\u3079\u3066\u306e\u5f15\u6570\u304c1\u884c\u306b\u53ce\u307e\u308b\u5834\u5408\u306f\u3001\u6b21\u306e\u884c\u306b\u914d\u7f6e\u3059\u308b\u3053\u3068\u3092\u8a31\u53ef\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>// BinPackParameters: false\n// AllowAllParametersOfDeclarationOnNextLine: true\nvoid function(\n    int a, int b, int c, int d, int e);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>// BinPackParameters: false\n// AllowAllParametersOfDeclarationOnNextLine: false\nvoid function(int a,\n              int b,\n              int c,\n              int d,\n              int e);</code></pre>",
+        "category": "Break",
+        "index": 3
+    },
+    {
+        "name": "AllowShortBlocksOnASingleLine",
+        "type": "enum",
+        "description": "\u77ed\u3044\u30d6\u30ed\u30c3\u30af\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u77ed\u3044\u30d6\u30ed\u30c3\u30af\u306f\u30011\u884c\u306b\u307e\u3068\u3081\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>while (true) {\n}\nwhile (true) {\n  continue;\n}</code></pre>"
+            },
+            {
+                "name": "Empty",
+                "description": "\u77ed\u3044\u30d6\u30ed\u30c3\u30af\u306f\u3001\u7a7a\u306e\u5834\u5408\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>while (true) {}\nwhile (true) {\n  continue;\n}</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "\u77ed\u3044\u30d6\u30ed\u30c3\u30af\u306f\u3001\u5e38\u306b1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>while (true) {}\nwhile (true) { continue; }</code></pre>"
+            }
+        ],
+        "category": "SingleLine",
+        "index": 0
+    },
+    {
+        "name": "AllowShortCaseLabelsOnASingleLine",
+        "type": "bool",
+        "description": "\u77ed\u3044 case \u30e9\u30d9\u30eb\u306f\u30011\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>switch (var) {\ncase 1: break;\ncase 2: return;\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>switch (var) {\ncase 1:\n    break;\ncase 2:\n    return;\n}</code></pre>",
+        "category": "SingleLine",
+        "index": 1
+    },
+    {
+        "name": "AllowShortEnumsOnASingleLine",
+        "type": "bool",
+        "description": "\u77ed\u3044\u5217\u6319\u578b\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>enum { A, B } myEnum;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>enum\n{\n  A,\n  B\n} myEnum;</code></pre>",
+        "category": "SingleLine",
+        "index": 2
+    },
+    {
+        "name": "AllowShortFunctionsOnASingleLine",
+        "type": "enum",
+        "description": "\u77ed\u3044\u95a2\u6570\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u77ed\u3044\u95a2\u6570\u306f\u30011\u884c\u306b\u307e\u3068\u3081\u307e\u305b\u3093\u3002"
+            },
+            {
+                "name": "InlineOnly",
+                "description": "\u77ed\u3044\u95a2\u6570\u306f\u3001\u30af\u30e9\u30b9\u5185\u3067\u5b9a\u7fa9\u3055\u308c\u305f\u30a4\u30f3\u30e9\u30a4\u30f3\u95a2\u6570\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    void function() { int a = 0; }\n};\nvoid function() {\n    int a = 0;\n}\nvoid emptyFuction() {}</code></pre>"
+            },
+            {
+                "name": "Empty",
+                "description": "\u77ed\u3044\u95a2\u6570\u306f\u3001\u7a7a\u306e\u95a2\u6570\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    void function() {\n        int a = 0;\n    }\n};\nvoid function() {\n    int a = 0;\n}\nvoid emptyFuction() {}</code></pre>"
+            },
+            {
+                "name": "Inline",
+                "description": "\u77ed\u3044\u95a2\u6570\u306f\u3001\u30af\u30e9\u30b9\u5185\u3067\u5b9a\u7fa9\u3055\u308c\u305f\u30a4\u30f3\u30e9\u30a4\u30f3\u95a2\u6570\u53ca\u3073\u7a7a\u306e\u95a2\u6570\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    void function() { int a = 0; }\n};\nvoid function() {\n    int a = 0;\n}\nvoid emptyFuction() {}</code></pre>"
+            },
+            {
+                "name": "All",
+                "description": "\u77ed\u3044\u95a2\u6570\u306f\u3001\u3059\u3079\u3066\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    void function() { int a = 0; }\n};\nvoid function() { int a = 0; }\nvoid emptyFuction() {}</code></pre>"
+            }
+        ],
+        "category": "SingleLine",
+        "index": 3
+    },
+    {
+        "name": "AllowShortIfStatementsOnASingleLine",
+        "type": "enum",
+        "description": "\u77ed\u3044 if \u6587\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u77ed\u3044 if \u6587\u306f\u30011\u884c\u306b\u307e\u3068\u3081\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>// if \u6587\u306e\u307f\nif (a)\n    printf(&quot;if&quot;);\n\n// else \u4ed8\u304d\u306e if \u6587\nif (b)\n    printf(&quot;if&quot;);\nelse\n    printf(&quot;else&quot;);</code></pre>"
+            },
+            {
+                "name": "WithoutElse",
+                "description": "\u77ed\u3044 if \u6587\u306f\u3001else \u304c\u306a\u3044\u5834\u5408\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// if \u6587\u306e\u307f\nif (a) printf(&quot;if&quot;);\n\n// else \u4ed8\u304d\u306e if \u6587\nif (b)\n    printf(&quot;if&quot;);\nelse\n    printf(&quot;else&quot;);</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "\u77ed\u3044 if \u6587\u306f\u3001\u5e38\u306b1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// if \u6587\u306e\u307f\nif (a) printf(&quot;if&quot;);\n\n// else \u4ed8\u304d\u306e if \u6587\nif (b) printf(&quot;if&quot;);\nelse\n    printf(&quot;else&quot;);</code></pre>"
+            }
+        ],
+        "category": "SingleLine",
+        "index": 4
+    },
+    {
+        "name": "AllowShortLambdasOnASingleLine",
+        "type": "enum",
+        "description": "\u77ed\u3044\u30e9\u30e0\u30c0\u95a2\u6570\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u77ed\u3044\u30e9\u30e0\u30c0\u95a2\u6570\u306f\u30011\u884c\u306b\u307e\u3068\u3081\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>// \u7a7a\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda1 = [](int a) {\n};\n// \u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda2 = [](int a) {\n    return a;\n};\n// \u30a4\u30f3\u30e9\u30a4\u30f3\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nstd::sort(a.begin(), a.end(), [](int x, int y) {\n    return x &lt; y;\n});</code></pre>"
+            },
+            {
+                "name": "Empty",
+                "description": "\u77ed\u3044\u30e9\u30e0\u30c0\u95a2\u6570\u306f\u3001\u7a7a\u306e\u5834\u5408\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// \u7a7a\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda1 = [](int a) {};\n// \u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda2 = [](int a) {\n    return a;\n};\n// \u30a4\u30f3\u30e9\u30a4\u30f3\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nstd::sort(a.begin(), a.end(), [](int x, int y) {\n    return x &lt; y;\n});</code></pre>"
+            },
+            {
+                "name": "Inline",
+                "description": "\u77ed\u3044\u30e9\u30e0\u30c0\u95a2\u6570\u306f\u3001\u30a4\u30f3\u30e9\u30a4\u30f3\u95a2\u6570\u306e\u5834\u5408\u306e\u307f1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// \u7a7a\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda1 = [](int a) {\n};\n// \u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda2 = [](int a) {\n    return a;\n};\n// \u30a4\u30f3\u30e9\u30a4\u30f3\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nstd::sort(a.begin(), a.end(),\n          [](int x, int y) { return x &lt; y; });</code></pre>"
+            },
+            {
+                "name": "All",
+                "description": "\u77ed\u3044\u30e9\u30e0\u30c0\u95a2\u6570\u306f\u3001\u5e38\u306b1\u884c\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// \u7a7a\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda1 = [](int a) {};\n// \u30e9\u30e0\u30c0\u95a2\u6570\nauto lambda2 = [](int a) { return a; };\n// \u30a4\u30f3\u30e9\u30a4\u30f3\u306e\u30e9\u30e0\u30c0\u95a2\u6570\nstd::sort(a.begin(), a.end(),\n          [](int x, int y) { return x &lt; y; });</code></pre>"
+            }
+        ],
+        "category": "SingleLine",
+        "index": 5
+    },
+    {
+        "name": "AllowShortLoopsOnASingleLine",
+        "type": "bool",
+        "description": "\u77ed\u3044 while \u6587\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>for (;;) printf(&quot;loop&quot;);\nwhile (true) printf(&quot;loop&quot;);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>for (;;)\n    printf(&quot;loop&quot;);\n\nwhile (true)\n    printf(&quot;loop&quot;);</code></pre>",
+        "category": "SingleLine",
+        "index": 6
+    },
+    {
+        "name": "AlwaysBreakAfterReturnType",
+        "type": "enum",
+        "description": "\u95a2\u6570\u5ba3\u8a00\u53ca\u3073\u5b9a\u7fa9\u306e\u623b\u308a\u5024\u306e\u5f8c\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u81ea\u52d5\u7684\u306b\u623b\u308a\u5024\u306e\u578b\u306e\u5f8c\u3067\u6539\u884c\u3057\u307e\u3059\u3002<code>PenaltyReturnTypeOnItsOwnLine</code>\u3092\u8003\u616e\u3057\u3066\u3044\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    // \u30af\u30e9\u30b9\u5185\u306e\u95a2\u6570\u5b9a\u7fa9\n    int function() { return 0; };\n};\n// \u95a2\u6570\u5ba3\u8a00\nint function();\n// \u95a2\u6570\u5b9a\u7fa9\nint function() { return 1; }</code></pre>"
+            },
+            {
+                "name": "All",
+                "description": "\u623b\u308a\u5024\u306e\u578b\u306e\u5f8c\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    // \u30af\u30e9\u30b9\u5185\u306e\u95a2\u6570\u5b9a\u7fa9\n    int\n    function() {\n        return 0;\n    };\n};\n// \u95a2\u6570\u5ba3\u8a00\nint\nfunction();\n// \u95a2\u6570\u5b9a\u7fa9\nint\nfunction() {\n    return 1;\n}</code></pre>"
+            },
+            {
+                "name": "TopLevel",
+                "description": "\u30c8\u30c3\u30d7\u30ec\u30d9\u30eb\u306e\u95a2\u6570\u5ba3\u8a00\u53ca\u3073\u5b9a\u7fa9\u306e\u307f\u3001\u623b\u308a\u5024\u306e\u578b\u306e\u5f8c\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    // \u30af\u30e9\u30b9\u5185\u306e\u95a2\u6570\u5b9a\u7fa9\n    int function() { return 0; };\n};\n// \u95a2\u6570\u5ba3\u8a00\nint\nfunction();\n// \u95a2\u6570\u5b9a\u7fa9\nint\nfunction() {\n    return 1;\n}</code></pre>"
+            },
+            {
+                "name": "AllDefinitions",
+                "description": "\u95a2\u6570\u5b9a\u7fa9\u306e\u307f\u3001\u623b\u308a\u5024\u306e\u578b\u306e\u5f8c\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    // \u30af\u30e9\u30b9\u5185\u306e\u95a2\u6570\u5b9a\u7fa9\n    int\n    function() {\n        return 0;\n    };\n};\n// \u95a2\u6570\u5ba3\u8a00\nint function();\n// \u95a2\u6570\u5b9a\u7fa9\nint\nfunction() {\n    return 1;\n}</code></pre>"
+            },
+            {
+                "name": "TopLevelDefinitions",
+                "description": "\u30c8\u30c3\u30d7\u30ec\u30d9\u30eb\u306e\u95a2\u6570\u5ba3\u8a00\u306e\u307f\u3001\u623b\u308a\u5024\u306e\u578b\u306e\u5f8c\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass {\n    // \u30af\u30e9\u30b9\u5185\u306e\u95a2\u6570\u5b9a\u7fa9\n    int function() { return 0; };\n};\n// \u95a2\u6570\u5ba3\u8a00\nint\nfunction();\n// \u95a2\u6570\u5b9a\u7fa9\nint function() { return 1; }</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 5
+    },
+    {
+        "name": "AlwaysBreakBeforeMultilineStrings",
+        "type": "bool",
+        "description": "\u8907\u6570\u884c\u306e\u6587\u5b57\u5217\u30ea\u30c6\u30e9\u30eb\u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>str =\n    &quot;Hello&quot;\n    &quot;World&quot;;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>str = &quot;Hello&quot;\n      &quot;World&quot;;</code></pre>",
+        "category": "Break",
+        "index": 6
+    },
+    {
+        "name": "AlwaysBreakTemplateDeclarations",
+        "type": "enum",
+        "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5ba3\u8a00\u306e\u5f8c\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "No",
+                "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5ba3\u8a00\u524d\u3067\u6539\u884c\u3057\u307e\u305b\u3093\u3002<code>PenaltyBreakTemplateDeclaration</code> \u3092\u8003\u616e\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>template &lt;typename T&gt; T foo() {}\ntemplate &lt;typename T&gt; T foo(int aaaaaaaaaaaaaaaaaaaaa,\n                            int bbbbbbbbbbbbbbbbbbbbb) {}</code></pre>"
+            },
+            {
+                "name": "MultiLine",
+                "description": "\u6b21\u306e\u884c\u304c\u8907\u6570\u884c\u306b\u6e21\u3063\u3066\u3044\u308b\u5834\u5408\u306e\u307f\u3001\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5ba3\u8a00\u306e\u5f8c\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>template &lt;typename T&gt; T foo() {}\ntemplate &lt;typename T&gt;\nT foo(int aaaaaaaaaaaaaaaaaaaaa,\n      int bbbbbbbbbbbbbbbbbbbbb) {}</code></pre>"
+            },
+            {
+                "name": "Yes",
+                "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5ba3\u8a00\u306e\u5f8c\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>template &lt;typename T&gt;\nT foo() {}\ntemplate &lt;typename T&gt;\nT foo(int aaaaaaaaaaaaaaaaaaaaa,\n      int bbbbbbbbbbbbbbbbbbbbb) {}</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 7
+    },
+    {
+        "name": "AttributeMacros",
+        "type": "list of string",
+        "description": "\u8b58\u5225\u5b50\u3067\u306f\u306a\u304f\u3001\u5c5e\u6027\u3084\u4fee\u98fe\u5b50\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>x = (char *__capability)&amp;y.\nint function(void) __ununsed.\nvoid only_writes_to_buffer(char *__output buffer).</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>AttributeMacros: [&quot;__capability&quot;, &quot;__output&quot;, &quot;__ununsed&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 0
+    },
+    {
+        "name": "BinPackArguments",
+        "type": "bool",
+        "description": "<code>false</code> \u306e\u5834\u5408\u3001\u95a2\u6570\u547c\u3073\u51fa\u3057\u306e\u5f15\u6570\u306f\u3059\u3079\u3066\u540c\u3058\u884c\u306b\u306a\u308b\u304b\u30011\u884c\u305a\u3064\u306b\u306a\u308a\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>function(int arg1, int arg2,\n         int arg3);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>function(int parameter1,\n         int parameter2,\n         int parameter3);</code></pre>",
+        "category": "Break",
+        "index": 1
+    },
+    {
+        "name": "BinPackParameters",
+        "type": "bool",
+        "description": "<code>false</code> \u306e\u5834\u5408\u3001\u95a2\u6570\u5ba3\u8a00\u3084\u95a2\u6570\u5b9a\u7fa9\u306e\u5f15\u6570\u306f\u3059\u3079\u3066\u540c\u3058\u884c\u306b\u306a\u308b\u304b\u30011\u884c\u305a\u3064\u306b\u306a\u308a\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>void function(parameter1, parameter2,\n              parameter3);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>void function(parameter1,\n              parameter2,\n              parameter3);</code></pre>",
+        "category": "Break",
+        "index": 4
+    },
+    {
+        "name": "BitFieldColonSpacing",
+        "type": "enum",
+        "description": "\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Both",
+                "description": "\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306e\u524d\u5f8c\u306b1\u3064\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>unsigned bf : 2;</code></pre>"
+            },
+            {
+                "name": "None",
+                "description": "\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u305b\u3093\u3002(<code>AlignConsecutiveBitFields</code> \u306e\u305f\u3081\u306b\u5fc5\u8981\u3067\u3042\u308c\u3070\u3001\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002)\n\n<pre class=\"language-cpp\"><code>unsigned bf:2;</code></pre>"
+            },
+            {
+                "name": "Before",
+                "description": "\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306e\u524d\u306b1\u3064\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>unsigned bf :2;</code></pre>"
+            },
+            {
+                "name": "After",
+                "description": "\u30d3\u30c3\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u30b3\u30ed\u30f3\u306e\u5f8c\u306b1\u3064\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n(<code>AlignConsecutiveBitFields</code> \u306e\u305f\u3081\u306b\u5fc5\u8981\u3067\u3042\u308c\u3070\u3001\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002)\n\n<pre class=\"language-cpp\"><code>unsigned bf: 2;</code></pre>"
+            }
+        ],
+        "category": "Space",
+        "index": 0
+    },
+    {
+        "name": "AfterCaseLabel",
+        "type": "bool",
+        "description": "case \u30e9\u30d9\u30eb\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>switch (var) {\ncase 1:\n{\n    break;\n}\ncase 2:\n{\n    return;\n}\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>switch (var) {\ncase 1: {\n    break;\n}\ncase 2: {\n    return;\n}\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 8
+    },
+    {
+        "name": "AfterClass",
+        "type": "bool",
+        "description": "\u30af\u30e9\u30b9\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>class foo\n{\n};</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>class foo {};</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 9
+    },
+    {
+        "name": "AfterControlStatement",
+        "type": "enum",
+        "description": "if\u3001for\u3001while\u3001switch \u306a\u3069\u306e\u5236\u5fa1\u69cb\u6587\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u5236\u5fa1\u6587\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>if (foo()) {\n} else {\n}\nfor (int i = 0; i &lt; 10; ++i) {\n}</code></pre>"
+            },
+            {
+                "name": "MultiLine",
+                "description": "\u6761\u4ef6\u5f0f\u304c\u8907\u6570\u884c\u306e\u5236\u5fa1\u6587\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u306e\u307f\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>if (foo &amp;&amp; bar &amp;&amp;\n    baz)\n{\n  quux();\n}\nwhile (foo || bar) {\n}</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "\u5236\u5fa1\u6587\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u306e\u307f\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>if (foo())\n{\n} else\n{}\nfor (int i = 0; i &lt; 10; ++i)\n{}</code></pre>"
+            }
+        ],
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 10
+    },
+    {
+        "name": "AfterEnum",
+        "type": "bool",
+        "description": "\u5217\u6319\u4f53\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>enum X : int { A, B };</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>enum X : int\n{\n    A,\n    B\n};</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 11
+    },
+    {
+        "name": "AfterFunction",
+        "type": "bool",
+        "description": "\u95a2\u6570\u5b9a\u7fa9\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>void foo()\n{\n  bar();\n  bar2();\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>void foo() {\n  bar();\n  bar2();\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 12
+    },
+    {
+        "name": "AfterNamespace",
+        "type": "bool",
+        "description": "\u540d\u524d\u7a7a\u9593\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>namespace\n{\nint foo();\nint bar();\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>namespace {\nint foo();\nint bar();\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 13
+    },
+    {
+        "name": "AfterStruct",
+        "type": "bool",
+        "description": "\u69cb\u9020\u4f53\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>struct foo\n{\n    int x;\n};</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>struct foo {\n    int x;\n};</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 14
+    },
+    {
+        "name": "AfterUnion",
+        "type": "bool",
+        "description": "\u5171\u7528\u4f53\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>union foo\n{\n  int x;\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>union foo {\n    int x;\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 15
+    },
+    {
+        "name": "AfterExternBlock",
+        "type": "bool",
+        "description": "extern \u30d6\u30ed\u30c3\u30af\u306e\u540d\u524d\u306e\u5f8c\u306e\u6ce2\u62ec\u5f27\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>extern &quot;C&quot;\n{\n    int foo();\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>extern &quot;C&quot; {\nint foo();\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 16
+    },
+    {
+        "name": "BeforeCatch",
+        "type": "bool",
+        "description": "catch \u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>try {\n    foo();\n}\ncatch () {\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>try {\n    foo();\n} catch () {\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 17
+    },
+    {
+        "name": "BeforeElse",
+        "type": "bool",
+        "description": "else \u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>if (foo()) {\n}\nelse {\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>if (foo()) {\n} else {\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 18
+    },
+    {
+        "name": "BeforeLambdaBody",
+        "type": "bool",
+        "description": "\u30e9\u30e0\u30c0\u95a2\u6570\u306e\u6ce2\u62ec\u5f27\u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>connect(\n  []()\n  {\n    foo();\n    bar();\n  });</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>connect([]() {\n  foo();\n  bar();\n});</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 19
+    },
+    {
+        "name": "BeforeWhile",
+        "type": "bool",
+        "description": "while \u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>do {\n  foo();\n}\nwhile (1);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>do {\n  foo();\n} while (1);</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Break",
+        "index": 20
+    },
+    {
+        "name": "IndentBraces",
+        "type": "bool",
+        "description": "\u6539\u884c\u3057\u305f\u6ce2\u62ec\u5f27\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>if (foo()) {\n    }\n    else {\n    }</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>if (foo()) {\n}\nelse {\n}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "Indent",
+        "index": 6
+    },
+    {
+        "name": "SplitEmptyFunction",
+        "type": "bool",
+        "description": "\u7a7a\u306e\u95a2\u6570\u672c\u4f53\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u3053\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u306f\u3001\u95a2\u6570\u306e\u958b\u59cb\u62ec\u5f27\u304c\u65e2\u306b\u6298\u308a\u8fd4\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3001\u3064\u307e\u308a <cite>AfterFunction</cite> \u306b\u3088\u308b\u6539\u884c\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u306b\u306e\u307f\u6709\u52b9\u3068\u306a\u308a\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>void foo()\n{\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>void foo()\n{}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "SingleLine",
+        "index": 7
+    },
+    {
+        "name": "SplitEmptyRecord",
+        "type": "bool",
+        "description": "\u30ec\u30b3\u30fc\u30c9 (\u4f8b: \u30af\u30e9\u30b9\u3001\u69cb\u9020\u4f53\u3001\u30e6\u30cb\u30aa\u30f3) \u306a\u3069\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u3053\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u306f\u3001\u30ec\u30b3\u30fc\u30c9\u306e\u958b\u59cb\u6ce2\u62ec\u5f27\u304c\u65e2\u306b\u6298\u308a\u8fd4\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3001\u3059\u306a\u308f\u3061\u3001<cite>AfterClass</cite> (\u30af\u30e9\u30b9\u306e\u5834\u5408) \u306b\u3088\u308b\u6539\u884c\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u306b\u306e\u307f\u6709\u52b9\u3068\u306a\u308a\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>class Foo\n{\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>class Foo\n{}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "SingleLine",
+        "index": 8
+    },
+    {
+        "name": "SplitEmptyNamespace",
+        "type": "bool",
+        "description": "\u7a7a\u306e\u540d\u524d\u7a7a\u9593\u30921\u884c\u306b\u307e\u3068\u3081\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u3053\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u306f\u3001\u540d\u524d\u7a7a\u9593\u306e\u958b\u59cb\u6ce2\u62ec\u5f27\u304c\u65e2\u306b\u6298\u308a\u8fd4\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3001\u3059\u306a\u308f\u3061\u3001<cite>AfterNamespace</cite> \u306b\u3088\u308b\u6539\u884c\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u306b\u306e\u307f\u6709\u52b9\u3068\u306a\u308a\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>namespace Foo\n{\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>namespace Foo {}</code></pre>",
+        "parent": "BraceWrapping",
+        "category": "SingleLine",
+        "index": 9
+    },
+    {
+        "name": "BreakBeforeBinaryOperators",
+        "type": "enum",
+        "description": "1\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u30012\u9805\u6f14\u7b97\u5b50\u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "2\u9805\u6f14\u7b97\u5b50\u306e\u5f8c\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int longNameVariable =\n    longNameVariable1 +\n    longNameVariable2 +\n    longNameVariable3;</code></pre>"
+            },
+            {
+                "name": "NonAssignment",
+                "description": "\u4ee3\u5165\u6f14\u7b97\u5b50\u4ee5\u5916\u306e2\u9805\u6f14\u7b97\u5b50\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int longNameVariable =\n    longNameVariable1\n    + longNameVariable2\n    + longNameVariable3;</code></pre>"
+            },
+            {
+                "name": "All",
+                "description": "2\u9805\u6f14\u7b97\u5b50\u306e\u524d\u3067\u5e38\u306b\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int longNameVariable\n    = longNameVariable1\n      + longNameVariable2\n      + longNameVariable3;</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 21
+    },
+    {
+        "name": "BreakBeforeBraces",
+        "type": "enum",
+        "description": "\u6ce2\u62ec\u5f27\u306e\u6539\u884c\u30b9\u30bf\u30a4\u30eb\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Attach",
+                "description": "\u5e38\u306b\u6ce2\u62ec\u5f27\u3092\u4ed8\u3051\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N {\nenum E {\n  E1,\n  E2,\n};\n\nclass C {\npublic:\n  C();\n};\n\nbool baz(int i) {\n  try {\n    do {\n      switch (i) {\n      case 1: {\n        foobar();\n        break;\n      }\n      default: {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  } catch (...) {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b) {\n  if (b) {\n    baz(2);\n  } else {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Linux",
+                "description": "<code>Attach</code> \u306b\u4f3c\u3066\u3044\u307e\u3059\u304c\u3001\u95a2\u6570\u3001\u540d\u524d\u7a7a\u9593\u3001\u30af\u30e9\u30b9\u5b9a\u7fa9\u306e\u6ce2\u62ec\u5f27\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N {\nenum E {\n  E1,\n  E2,\n};\n\nclass C {\npublic:\n  C();\n};\n\nbool baz(int i) {\n  try {\n    do {\n      switch (i) {\n      case 1: {\n        foobar();\n        break;\n      }\n      default: {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  } catch (...) {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b) {\n  if (b) {\n    baz(2);\n  } else {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Mozilla",
+                "description": "<code>Attach</code>\u3068\u540c\u69d8\u3067\u3059\u304c\u3001enum\u3001function\u3001record \u306e\u5b9a\u7fa9\u3067\u306f\u6ce2\u62ec\u5f27\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N\n{\nenum E {\n  E1,\n  E2,\n};\n\nclass C\n{\npublic:\n  C();\n};\n\nbool baz(int i)\n{\n  try {\n    do {\n      switch (i) {\n      case 1: {\n        foobar();\n        break;\n      }\n      default: {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  } catch (...) {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b)\n{\n  if (b) {\n    baz(2);\n  } else {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Stroustrup",
+                "description": "<code>Attach</code>\u306b\u4f3c\u3066\u3044\u307e\u3059\u304c\u3001\u95a2\u6570\u5b9a\u7fa9\u3001catch\u3001else \u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N {\nenum E {\n  E1,\n  E2,\n};\n\nclass C {\npublic:\n  C();\n};\n\nbool baz(int i)\n{\n  try {\n    do {\n      switch (i) {\n      case 1: {\n        foobar();\n        break;\n      }\n      default: {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  }\n  catch (...) {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b)\n{\n  if (b) {\n    baz(2);\n  }\n  else {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Allman",
+                "description": "\u5fc5\u305a\u6ce2\u62ec\u5f27\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N\n{\nenum E\n{\n  E1,\n  E2,\n};\n\nclass C\n{\npublic:\n  C();\n};\n\nbool baz(int i)\n{\n  try\n  {\n    do\n    {\n      switch (i)\n      {\n      case 1:\n      {\n        foobar();\n        break;\n      }\n      default:\n      {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  }\n  catch (...)\n  {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b)\n{\n  if (b)\n  {\n    baz(2);\n  }\n  else\n  {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Whitesmiths",
+                "description": "<code>Allman</code> \u306b\u4f3c\u3066\u3044\u307e\u3059\u304c\u3001\u5e38\u306b\u6ce2\u62ec\u5f27\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u3066\u30b3\u30fc\u30c9\u3092\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N\n  {\nenum E\n  {\n  E1,\n  E2,\n  };\n\nclass C\n  {\npublic:\n  C();\n  };\n\nbool baz(int i)\n  {\n  try\n    {\n    do\n      {\n      switch (i)\n        {\n        case 1:\n        {\n        foobar();\n        break;\n        }\n        default:\n        {\n        break;\n        }\n        }\n      } while (--i);\n    return true;\n    }\n  catch (...)\n    {\n    handleError();\n    return false;\n    }\n  }\n\nvoid foo(bool b)\n  {\n  if (b)\n    {\n    baz(2);\n    }\n  else\n    {\n    baz(5);\n    }\n  }\n\nvoid bar() { foo(true); }\n  } // namespace N</code></pre>"
+            },
+            {
+                "name": "GNU",
+                "description": "\u6ce2\u62ec\u5f27\u306e\u524d\u3067\u306f\u5e38\u306b\u6539\u884c\u3057\u3001\u30af\u30e9\u30b9\u3084\u95a2\u6570\u306a\u3069\u306e\u5b9a\u7fa9\u3067\u306f\u306a\u304f\u3001\u5236\u5fa1\u6587\u306e\u6ce2\u62ec\u5f27\u306b\u306f\u30a4\u30f3\u30c7\u30f3\u30c8\u3092\u8ffd\u52a0\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N\n{\nenum E\n{\n  E1,\n  E2,\n};\n\nclass C\n{\npublic:\n  C();\n};\n\nbool baz(int i)\n{\n  try\n    {\n      do\n        {\n          switch (i)\n            {\n            case 1:\n              {\n                foobar();\n                break;\n              }\n            default:\n              {\n                break;\n              }\n            }\n        }\n      while (--i);\n      return true;\n    }\n  catch (...)\n    {\n      handleError();\n      return false;\n    }\n}\n\nvoid foo(bool b)\n{\n  if (b)\n    {\n      baz(2);\n    }\n  else\n    {\n      baz(5);\n    }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "WebKit",
+                "description": "<code>Attach</code> \u306b\u4f3c\u3066\u3044\u307e\u3059\u304c\u3001\u95a2\u6570\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace N {\nenum E {\n  E1,\n  E2,\n};\n\nclass C {\npublic:\n  C();\n};\n\nbool baz(int i)\n{\n  try {\n    do {\n      switch (i) {\n      case 1: {\n        foobar();\n        break;\n      }\n      default: {\n        break;\n      }\n      }\n    } while (--i);\n    return true;\n  } catch (...) {\n    handleError();\n    return false;\n  }\n}\n\nvoid foo(bool b)\n{\n  if (b) {\n    baz(2);\n  } else {\n    baz(5);\n  }\n}\n\nvoid bar() { foo(true); }\n} // namespace N</code></pre>"
+            },
+            {
+                "name": "Custom",
+                "description": "<cite>BraceWrapping</cite> \u3067\u500b\u3005\u306e\u6539\u884c\u3092\u8a2d\u5b9a\u3057\u307e\u3059\u3002"
+            }
+        ],
+        "category": "Break",
+        "index": 22
+    },
+    {
+        "name": "BreakBeforeConceptDeclarations",
+        "type": "bool",
+        "description": "\u30b3\u30f3\u30bb\u30d7\u30c8\u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>template&lt;typename T&gt;\nconcept ...</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>template&lt;typename T&gt; concept ...</code></pre>",
+        "category": "Break",
+        "index": 23
+    },
+    {
+        "name": "BreakBeforeTernaryOperators",
+        "type": "bool",
+        "description": "\u4e09\u9805\u6f14\u7b97\u5b50\u306e\u524d\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>veryVeryLongVariableName\n    ? firstVeryVeryLongVariableName1\n    : firstVeryVeryLongVariableName2;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>veryVeryLongVariableName ?\n    firstVeryVeryLongVariableName1 :\n    firstVeryVeryLongVariableName2;</code></pre>",
+        "category": "Break",
+        "index": 24
+    },
+    {
+        "name": "BreakConstructorInitializers",
+        "type": "enum",
+        "description": "1\u884c\u306b\u53ce\u307e\u3089\u305a\u6539\u884c\u304c\u767a\u751f\u3057\u305f\u5834\u5408\u306b\u3001\u30e1\u30f3\u30d0\u521d\u671f\u5316\u5b50\u30ea\u30b9\u30c8\u306e\u6539\u884c\u65b9\u6cd5\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "BeforeColon",
+                "description": "\u30b3\u30ed\u30f3\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>Constructor()\n    : initializer1(),\n      initializer2()\n{}</code></pre>"
+            },
+            {
+                "name": "BeforeComma",
+                "description": "\u30b3\u30ed\u30f3\u53ca\u3073\u30ab\u30f3\u30de\u306e\u524d\u3067\u6539\u884c\u3057\u3001\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>Constructor()\n    : initializer1()\n    , initializer2()</code></pre>"
+            },
+            {
+                "name": "AfterColon",
+                "description": "\u30b3\u30ed\u30f3\u53ca\u3073\u30ab\u30f3\u30de\u306e\u5f8c\u3067\u6539\u884c\u3059\u308b\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>Constructor() :\n    initializer1(),\n    initializer2()\n{}</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 25
+    },
+    {
+        "name": "BreakInheritanceList",
+        "type": "enum",
+        "description": "1\u884c\u306b\u53ce\u307e\u3089\u306a\u3044\u5834\u5408\u306b\u3001\u7d99\u627f\u30ea\u30b9\u30c8\u306e\u6539\u884c\u65b9\u6cd5\u3092\u6307\u5b9a\u3059\u308b\u3002",
+        "enums": [
+            {
+                "name": "BeforeColon",
+                "description": "\u30b3\u30ed\u30f3\u306e\u524d\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass : BaseClass1,\n                BaseClass2,\n                BaseClass3 {};</code></pre>"
+            },
+            {
+                "name": "BeforeComma",
+                "description": "\u30b3\u30ed\u30f3\u53ca\u3073\u30ab\u30f3\u30de\u306e\u524d\u3067\u6539\u884c\u3057\u3001\u6574\u5217\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass\n    : BaseClass1\n    , BaseClass2\n    , BaseClass3 {};</code></pre>"
+            },
+            {
+                "name": "AfterColon",
+                "description": "\u30b3\u30ed\u30f3\u53ca\u3073\u30ab\u30f3\u30de\u306e\u5f8c\u3067\u6539\u884c\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>class MyClass :\n    BaseClass1,\n    BaseClass2,\n    BaseClass3 {};</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 26
+    },
+    {
+        "name": "BreakStringLiterals",
+        "type": "bool",
+        "description": "\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u6642\u306b\u6587\u5b57\u30ea\u30c6\u30e9\u30eb\u3092\u5206\u89e3\u3059\u308b\u3053\u3068\u3092\u8a31\u53ef\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>str = &quot;text text text text text &quot;\n      &quot;texttext text text&quot;;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>str = &quot;text text text text text text text text text&quot;;</code></pre>",
+        "category": "Break",
+        "index": 27
+    },
+    {
+        "name": "ColumnLimit",
+        "type": "unsigned",
+        "description": "1\u884c\u306e\u6700\u5927\u6587\u5b57\u6570\u3092\u6307\u5b9a\u3057\u307e\u3059\u30020 \u3092\u6307\u5b9a\u3057\u305f\u5834\u5408\u306f\u5236\u9650\u306a\u3057\u3092\u610f\u5473\u3057\u307e\u3059\u3002",
+        "category": "Common",
+        "index": 1
+    },
+    {
+        "name": "CommentPragmas",
+        "type": "string",
+        "description": "\u7279\u5225\u306a\u610f\u5473\u3092\u6301\u3064\u3001\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u6642\u306b\u6539\u884c\u3067\u5206\u5272\u3055\u308c\u3066\u306f\u3044\u3051\u306a\u3044\u30b3\u30e1\u30f3\u30c8\u3092\u6b63\u898f\u8868\u73fe\u3067\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// CommentPragmas: &quot;^ Dont break&quot;\n\n// Dont break text text text text text.text\nint var1;\n\n// text text text text text text text\n// text.text\nint var2;</code></pre>",
+        "category": "Break",
+        "index": 28
+    },
+    {
+        "name": "CompactNamespaces",
+        "type": "bool",
+        "description": "<code>true</code> \u306e\u5834\u5408\u3001\u9023\u7d9a\u3057\u305f\u540d\u524d\u7a7a\u9593\u306e\u5ba3\u8a00\u306f\u540c\u3058\u884c\u306b\u306a\u308a\u307e\u3059\u3002<code>false</code> \u306e\u5834\u5408\u3001\u5404\u540d\u524d\u7a7a\u9593\u306f\u6539\u884c\u3067\u5ba3\u8a00\u3055\u308c\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>namespace Foo { namespace Bar {\n}}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>namespace Foo {\nnamespace Bar {\n}\n}</code></pre>\n\n\u305f\u3060\u3057\u30011\u884c\u306b\u53ce\u307e\u3089\u306a\u3044\u5834\u5408\u306f\u9014\u4e2d\u3067\u6539\u884c\u3055\u308c\u308b\u3053\u3068\u3082\u3042\u308a\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace Foo { namespace Bar {\nnamespace Extra {\n}}}</code></pre>",
+        "category": "SingleLine",
+        "index": 10
+    },
+    {
+        "name": "ConstructorInitializerAllOnOneLineOrOnePerLine",
+        "type": "bool",
+        "description": "\u6539\u884c\u3059\u308b\u5fc5\u8981\u304c\u3042\u308b\u5834\u5408\u3001\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf\u521d\u671f\u5316\u5b50\u306f1\u884c\u307e\u305f\u306f\u5404\u884c\u306b1\u3064\u306b\u306a\u308b\u3088\u3046\u306b\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>Constructor()\n    : initializer1(),\n      initializer2(),\n      initializer3()\n{\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>Constructor()\n    : initializer1(), initializer2(),\n      initializer3()\n{\n}</code></pre>",
+        "category": "SingleLine",
+        "index": 11
+    },
+    {
+        "name": "ConstructorInitializerIndentWidth",
+        "type": "unsigned",
+        "description": "\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf\u521d\u671f\u5316\u3092\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u306e\u5e45\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// ConstructorInitializerIndentWidth: 2\nConstructor()\n  : initializer1(), initializer2()\n{\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>// ConstructorInitializerIndentWidth: 4\nConstructor()\n    : initializer1(), initializer2()\n{\n}</code></pre>",
+        "category": "Indent",
+        "index": 4
+    },
+    {
+        "name": "ContinuationIndentWidth",
+        "type": "unsigned",
+        "description": "\u6587\u306e\u9014\u4e2d\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u306e\u5e45\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// ContinuationIndentWidth: 2\nint i =\n  longFunction(arg);</code></pre>\n\n<pre class=\"language-cpp\"><code>// ContinuationIndentWidth: 4\nint i =\n    longFunction(arg);</code></pre>",
+        "category": "Indent",
+        "index": 5
+    },
+    {
+        "name": "Cpp11BracedListStyle",
+        "type": "bool",
+        "description": "\u4e00\u69d8\u521d\u671f\u5316\u5b50\u306e\u6ce2\u62ec\u5f27\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>vector&lt;int&gt; x{1, 2, 3, 4};\nvector&lt;T&gt; x{{}, {}, {}, {}};\nf(MyMap[{composite, key}]);\nnew int[3]{1, 2, 3};</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>vector&lt;int&gt; x{ 1, 2, 3, 4 };\nvector&lt;T&gt; x{ {}, {}, {}, {} };\nf(MyMap[{ composite, key }]);\nnew int[3]{ 1, 2, 3 };</code></pre>",
+        "category": "Space",
+        "index": 1
+    },
+    {
+        "name": "DeriveLineEnding",
+        "type": "bool",
+        "description": "<code>true</code> \u306e\u5834\u5408\u3001\u6539\u884c\u30b3\u30fc\u30c9\u306f\u30b3\u30fc\u30c9\u304b\u3089\u81ea\u52d5\u7684\u306b\u5224\u65ad\u3057\u307e\u3059\u3002<code>UseCRLF</code> \u306f\u30d5\u30a9\u30fc\u30eb\u30d0\u30c3\u30af\u3068\u3057\u3066\u4f7f\u7528\u3055\u308c\u307e\u3059\u3002",
+        "category": "Common",
+        "index": 2
+    },
+    {
+        "name": "DerivePointerAlignment",
+        "type": "bool",
+        "description": "<code>true</code> \u306e\u5834\u5408\u3001\u53c2\u7167 <code>&</code> \u3084\u30dd\u30a4\u30f3\u30bf <code>*</code> \u3092\u3069\u3061\u3089\u306b\u6574\u5217\u3055\u305b\u308b\u304b\u3092\u30b3\u30fc\u30c9\u304b\u3089\u81ea\u52d5\u7684\u306b\u5224\u65ad\u3057\u307e\u3059\u3002<code>PointerAlignment</code> \u306f\u30d5\u30a9\u30fc\u30eb\u30d0\u30c3\u30af\u3068\u3057\u3066\u4f7f\u7528\u3055\u308c\u307e\u3059\u3002",
+        "category": "Space",
+        "index": 22
+    },
+    {
+        "name": "DisableFormat",
+        "type": "bool",
+        "description": "\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3092\u7121\u52b9\u306b\u3057\u307e\u3059\u3002",
+        "category": "Other",
+        "index": 0
+    },
+    {
+        "name": "EmptyLineBeforeAccessModifier",
+        "type": "enum",
+        "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u524d\u306e\u7a7a\u884c\u3092\u4fdd\u6301\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u524d\u306e\u7a7a\u884c\u3092\u3059\u3079\u3066\u524a\u9664\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>struct foo {\nprivate:\n  int i;\nprotected:\n  int j;\n  /* comment */\npublic:\n  foo() {}\nprivate:\nprotected:\n};</code></pre>"
+            },
+            {
+                "name": "Leave",
+                "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u524d\u306e\u65e2\u5b58\u306e\u7a7a\u884c\u3092\u6b8b\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "LogicalBlock",
+                "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u304c\u65b0\u3057\u3044\u8ad6\u7406\u30d6\u30ed\u30c3\u30af\u3092\u958b\u59cb\u3059\u308b\u5834\u5408\u306e\u307f\u7a7a\u884c\u3092\u8ffd\u52a0\u3057\u307e\u3059\u3002\u8ad6\u7406\u30d6\u30ed\u30c3\u30af\u306f\u30011\u3064\u4ee5\u4e0a\u306e\u30e1\u30f3\u30d0\u5909\u6570\u3084\u30e1\u30f3\u30d0\u95a2\u6570\u304b\u3089\u306a\u308a\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>struct foo {\nprivate:\n  int i;\n\nprotected:\n  int j;\n  /* comment */\npublic:\n  foo() {}\n\nprivate:\nprotected:\n};</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u304c\u69cb\u9020\u4f53\u3084\u30af\u30e9\u30b9\u5b9a\u7fa9\u306e\u5148\u982d\u306b\u3042\u308b\u5834\u5408\u3092\u9664\u304d\u3001\u30a2\u30af\u30bb\u30b9\u4fee\u98fe\u5b50\u306e\u524d\u306b\u306f\u5fc5\u305a\u7a7a\u884c\u3092\u8ffd\u52a0\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>struct foo {\nprivate:\n  int i;\n\nprotected:\n  int j;\n  /* comment */\n\npublic:\n  foo() {}\n\nprivate:\n\nprotected:\n};</code></pre>"
+            }
+        ],
+        "category": "Other",
+        "index": 1
+    },
+    {
+        "name": "FixNamespaceComments",
+        "type": "bool",
+        "description": "\u540d\u524d\u7a7a\u9593\u306e\u7d42\u4e86\u62ec\u5f27\u5f8c\u306b\u30b3\u30e1\u30f3\u30c8\u3092\u81ea\u52d5\u8ffd\u52a0\u3059\u308b\u304b\u3069\u3046\u304b\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace a {\nfoo();\n} // namespace a;</code></pre>",
+        "category": "Other",
+        "index": 2
+    },
+    {
+        "name": "ForEachMacros",
+        "type": "list of string",
+        "description": "\u95a2\u6570\u547c\u3073\u51fa\u3057\u3068\u3057\u3066\u3067\u306f\u306a\u304f\u3001<code>for</code> \u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>BOOST_FOREACH (int x, ar) {\n    std::cout &lt;&lt; x &lt;&lt; std::endl;\n}</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>ForEachMacros: [&quot;RANGES_FOR&quot;, &quot;FOREACH&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 1
+    },
+    {
+        "name": "IncludeBlocks",
+        "type": "enum",
+        "description": "\u8907\u6570\u306e <code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u30921\u3064\u306e\u30d6\u30ed\u30c3\u30af\u3068\u3057\u3066\u4e26\u3079\u66ff\u3048\u305f\u308a\u3001\u30ab\u30c6\u30b4\u30ea\u306b\u57fa\u3065\u3044\u3066\u5206\u5272\u3057\u305f\u308a\u3059\u308b\u3053\u3068\u304c\u3067\u304d\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Preserve",
+                "description": "\u5404 <code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u5225\u3005\u306b\u30bd\u30fc\u30c8\u3057\u307e\u3059\u3002\n\n\u30bd\u30fc\u30c8\u524d\n<pre class=\"language-cpp\"><code>#include &quot;b.h&quot;\n\n#include &lt;lib/main.h&gt;\n#include &quot;a.h&quot;</code></pre>\n\n\u30bd\u30fc\u30c8\u5f8c\n<pre class=\"language-cpp\"><code>#include &quot;b.h&quot;\n\n#include &quot;a.h&quot;\n#include &lt;lib/main.h&gt;</code></pre>"
+            },
+            {
+                "name": "Merge",
+                "description": "\u8907\u6570\u306e <code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u30de\u30fc\u30b8\u3057\u3066\u30011\u3064\u306e\u30d6\u30ed\u30c3\u30af\u3068\u3057\u3066\u30bd\u30fc\u30c8\u3057\u307e\u3059\u3002\n\n\u30bd\u30fc\u30c8\u524d\n<pre class=\"language-cpp\"><code>#include &quot;b.h&quot;\n\n#include &lt;lib/main.h&gt;\n#include &quot;a.h&quot;</code></pre>\n\n\u30bd\u30fc\u30c8\u5f8c\n<pre class=\"language-cpp\"><code>#include &quot;a.h&quot;\n#include &quot;b.h&quot;\n#include &lt;lib/main.h&gt;</code></pre>"
+            },
+            {
+                "name": "Regroup",
+                "description": "\u8907\u6570\u306e <code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u4e00\u7dd2\u306b\u30de\u30fc\u30b8\u3057\u30011\u3064\u306e\u30d6\u30ed\u30c3\u30af\u3068\u3057\u3066\u30bd\u30fc\u30c8\u3057\u307e\u3059\u3002\u305d\u3057\u3066\u3001\u30ab\u30c6\u30b4\u30ea\u306e\u512a\u5148\u5ea6\u306b\u57fa\u3065\u3044\u3066\u30b0\u30eb\u30fc\u30d7\u306b\u5206\u5272\u3057\u307e\u3059\u3002<code>IncludeCategories</code> \u3092\u53c2\u7167\u3057\u3066\u304f\u3060\u3055\u3044\u3002\n\n\u30bd\u30fc\u30c8\u524d\n<pre class=\"language-cpp\"><code>#include &quot;b.h&quot;\n\n#include &lt;lib/main.h&gt;\n#include &quot;a.h&quot;</code></pre>\n\n\u30bd\u30fc\u30c8\u5f8c\n<pre class=\"language-cpp\"><code>#include &quot;a.h&quot;\n#include &quot;b.h&quot;\n\n#include &lt;lib/main.h&gt;</code></pre>"
+            }
+        ],
+        "category": "Other",
+        "index": 3
+    },
+    {
+        "name": "IndentCaseBlocks",
+        "type": "bool",
+        "description": "case \u30e9\u30d9\u30eb\u306e\u30d6\u30ed\u30c3\u30af\u3092 case \u30e9\u30d9\u30eb\u304b\u30891\u30ec\u30d9\u30eb\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002<code>false</code> \u306e\u5834\u5408\u3001case \u30e9\u30d9\u30eb\u306b\u7d9a\u304f\u30d6\u30ed\u30c3\u30af\u306f\u3001case \u30e9\u30d9\u30eb\u3068\u540c\u3058\u30a4\u30f3\u30c7\u30f3\u30c8\u30ec\u30d9\u30eb\u3092\u4f7f\u7528\u3057\u3001case \u306e\u30e9\u30d9\u30eb\u3092 if \u30b9\u30c6\u30fc\u30c8\u30e1\u30f3\u30c8\u3068\u540c\u3058\u3088\u3046\u306b\u6271\u3044\u307e\u3059\u3002<code>true</code> \u306e\u5834\u5408\u306f\u30b9\u30b3\u30fc\u30d7\u30d6\u30ed\u30c3\u30af\u3068\u3057\u3066\u30a4\u30f3\u30c7\u30f3\u30c8\u3055\u308c\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>switch (fool) {\ncase 1: {\n  bar();\n} break;\ndefault: {\n  plop();\n}\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>switch (fool) {\ncase 1:\n  {\n    bar();\n  }\n  break;\ndefault:\n  {\n    plop();\n  }\n}</code></pre>",
+        "category": "Indent",
+        "index": 7
+    },
+    {
+        "name": "IndentCaseLabels",
+        "type": "bool",
+        "description": "case \u30e9\u30d9\u30eb\u3092 switch\u6587 \u304b\u30891\u30ec\u30d9\u30eb\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002<code>false</code> \u306e\u5834\u5408\u306f\u3001switch \u6587\u3068\u540c\u3058\u30a4\u30f3\u30c7\u30f3\u30c8\u30ec\u30d9\u30eb\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002switch \u6587\u306e\u4e2d\u8eab\u306f\u3001case \u30e9\u30d9\u30eb\u3088\u308a\u3082\u5e38\u306b1\u30ec\u30d9\u30eb\u30a4\u30f3\u30c7\u30f3\u30c8\u3055\u308c\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>switch (flag) {\n    case 1:\n        foo();\n        break;\n    default:\n        bar();\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>switch (flag) {\ncase 1:\n    foo();\n    break;\ndefault:\n    bar();\n}</code></pre>",
+        "category": "Indent",
+        "index": 8
+    },
+    {
+        "name": "IndentExternBlock",
+        "type": "enum",
+        "description": "extern \u30d6\u30ed\u30c3\u30af\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "AfterExternBlock",
+                "description": "<code>AfterExternBlock</code> \u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u3068\u306e\u4e0b\u4f4d\u4e92\u63db\u6027\u304c\u3042\u308a\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// IndentExternBlock: AfterExternBlock\n// BraceWrapping.AfterExternBlock: true\nextern &quot;C&quot;\n{\n    void foo();\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>// IndentExternBlock: AfterExternBlock\n// BraceWrapping.AfterExternBlock: false\nextern &quot;C&quot;\n{\nvoid foo();\n}</code></pre>"
+            },
+            {
+                "name": "NoIndent",
+                "description": "extern \u30d6\u30ed\u30c3\u30af\u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u3092\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>extern &quot;C&quot; {\nvoid foo();\n}</code></pre>"
+            },
+            {
+                "name": "Indent",
+                "description": "extern \u30d6\u30ed\u30c3\u30af\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>extern &quot;C&quot; {\n  void foo();\n}</code></pre>"
+            }
+        ],
+        "category": "Indent",
+        "index": 9
+    },
+    {
+        "name": "IndentGotoLabels",
+        "type": "bool",
+        "description": "goto \u30e9\u30d9\u30eb\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>int f() {\n  if (foo()) {\n  label1:\n    bar();\n  }\nlabel2:\n  return 1;\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>int f() {\n  if (foo()) {\nlabel1:\n    bar();\n  }\nlabel2:\n  return 1;\n}</code></pre>",
+        "category": "Indent",
+        "index": 10
+    },
+    {
+        "name": "IndentPPDirectives",
+        "type": "enum",
+        "description": "\u30d7\u30ea\u30d7\u30ed\u30bb\u30c3\u30b5\u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>#if FOO\n#if BAR\n#include &lt;foo&gt;\n#endif\n#endif</code></pre>"
+            },
+            {
+                "name": "AfterHash",
+                "description": "<code>#</code> \u306e\u5f8c\u3067\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#if FOO\n#  if BAR\n#    include &lt;foo&gt;\n#  endif\n#endif</code></pre>"
+            },
+            {
+                "name": "BeforeHash",
+                "description": "<code>#</code> \u306e\u524d\u3067\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#if FOO\n    #if BAR\n        #include &lt;foo&gt;\n    #endif\n#endif</code></pre>"
+            }
+        ],
+        "category": "Indent",
+        "index": 11
+    },
+    {
+        "name": "IndentRequires",
+        "type": "bool",
+        "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5185\u306e requires \u53e5\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>template &lt;typename It&gt;\n  requires Iterator&lt;It&gt;\nvoid sort(It begin, It end) {\n  //....\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>template &lt;typename It&gt;\nrequires Iterator&lt;It&gt;\nvoid sort(It begin, It end) {\n  //....\n}</code></pre>",
+        "category": "Indent",
+        "index": 12
+    },
+    {
+        "name": "IndentWidth",
+        "type": "unsigned",
+        "description": "\u30a4\u30f3\u30c7\u30f3\u30c8\u5e45\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// IndentWidth: 3\nvoid f() {\n   someFunction();\n   if (true, false) {\n      f();\n   }\n}</code></pre>",
+        "category": "Indent",
+        "index": 2
+    },
+    {
+        "name": "IndentWrappedFunctionNames",
+        "type": "bool",
+        "description": "\u95a2\u6570\u306e\u5ba3\u8a00\u3084\u5b9a\u7fa9\u306e\u578b\u306e\u5f8c\u3067\u6539\u884c\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3001\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>LoooooooooooooooooooooooooooooooooooooooongReturnType\n    LoooooooooooooooooooooooooooooooongFunctionDeclaration();</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>LoooooooooooooooooooooooooooooooooooooooongReturnType\nLoooooooooooooooooooooooooooooooongFunctionDeclaration();</code></pre>",
+        "category": "Indent",
+        "index": 13
+    },
+    {
+        "name": "KeepEmptyLinesAtTheStartOfBlocks",
+        "type": "bool",
+        "description": "\u30d6\u30ed\u30c3\u30af\u306e\u5148\u982d\u306e\u9023\u7d9a\u3057\u305f\u7a7a\u884c\u3092\u4f55\u884c\u307e\u3067\u4fdd\u6301\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>if (foo) {\n\n    bar();\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>if (foo) {\n    bar();\n}</code></pre>",
+        "category": "Other",
+        "index": 4
+    },
+    {
+        "name": "Language",
+        "type": "enum",
+        "description": "\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u5bfe\u8c61\u306e\u8a00\u8a9e\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u4f7f\u7528\u3057\u307e\u305b\u3093\u3002"
+            },
+            {
+                "name": "Cpp",
+                "description": "C, C++"
+            },
+            {
+                "name": "CSharp",
+                "description": "C#"
+            },
+            {
+                "name": "Java",
+                "description": "Java"
+            },
+            {
+                "name": "JavaScript",
+                "description": "JavaScript"
+            },
+            {
+                "name": "ObjC",
+                "description": "Objective-C\u3001Objective-C++"
+            },
+            {
+                "name": "Proto",
+                "description": "<a href=\"https://developers.google.com/protocol-buffers/\">Protocol Buffers\n</a>"
+            },
+            {
+                "name": "TableGen",
+                "description": "[TableGen](https://llvm.org/docs/TableGen/index.html)"
+            },
+            {
+                "name": "TextProto",
+                "description": "\u30c6\u30ad\u30b9\u30c8\u5f62\u5f0f\u306e <a href=\"https://developers.google.com/protocol-buffers/\">Protocol Buffers\n</a>"
+            }
+        ],
+        "category": "Common",
+        "index": 3
+    },
+    {
+        "name": "MacroBlockBegin",
+        "type": "string",
+        "description": "\u30d6\u30ed\u30c3\u30af\u306e\u958b\u59cb\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u6b63\u898f\u8868\u73fe\u3067\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>FOO_BEGIN\n    foo();\n    BAR_BEGIN\n        bar();\n    BAR_END\nFOO_END</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>ForEachMacros: &quot;^FOO_BEGIN|^BAR_BEGIN&quot;</code></pre>",
+        "category": "Macro",
+        "index": 2
+    },
+    {
+        "name": "MacroBlockEnd",
+        "type": "string",
+        "description": "\u30d6\u30ed\u30c3\u30af\u306e\u7d42\u4e86\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u6b63\u898f\u8868\u73fe\u3067\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>FOO_BEGIN\n    foo();\n    BAR_BEGIN\n        bar();\n    BAR_END\nFOO_END</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>ForEachMacros: &quot;^FOO_BEGIN|^BAR_BEGIN&quot;</code></pre>",
+        "category": "Macro",
+        "index": 3
+    },
+    {
+        "name": "MaxEmptyLinesToKeep",
+        "type": "unsigned",
+        "description": "\u9023\u7d9a\u3057\u305f\u7a7a\u884c\u3092\u4f55\u884c\u307e\u3067\u4fdd\u6301\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// MaxEmptyLinesToKeep: 0\nif (foo) {\n    bar();\n}</code></pre>\n\n<pre class=\"language-cpp\"><code>// MaxEmptyLinesToKeep: 2\nif (foo) {\n\n\n    bar();\n}</code></pre>",
+        "category": "Other",
+        "index": 5
+    },
+    {
+        "name": "NamespaceIndentation",
+        "type": "enum",
+        "description": "\u540d\u524d\u7a7a\u9593\u3092\u30a4\u30f3\u30c7\u30f3\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "None",
+                "description": "\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>namespace out {\nint i;\nnamespace in {\nint i;\n}\n}</code></pre>"
+            },
+            {
+                "name": "Inner",
+                "description": "\u5165\u308c\u5b50\u306b\u306a\u3063\u3066\u3044\u308b\u540d\u524d\u7a7a\u9593\u3067\u306e\u307f\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace out {\nint i;\nnamespace in {\n    int i;\n}\n}</code></pre>"
+            },
+            {
+                "name": "All",
+                "description": "\u3059\u3079\u3066\u306e\u540d\u524d\u7a7a\u9593\u3067\u30a4\u30f3\u30c7\u30f3\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>namespace out {\n    int i;\n    namespace in {\n        int i;\n    }\n}</code></pre>"
+            }
+        ],
+        "category": "Indent",
+        "index": 14
+    },
+    {
+        "name": "NamespaceMacros",
+        "type": "list of string",
+        "description": "\u540d\u524d\u7a7a\u9593\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002",
+        "category": "Macro",
+        "index": 4
+    },
+    {
+        "name": "PenaltyBreakAssignment",
+        "type": "unsigned",
+        "description": "\u4ee3\u5165\u6f14\u7b97\u5b50\u306e\u524d\u5f8c\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 29
+    },
+    {
+        "name": "PenaltyBreakBeforeFirstCallParameter",
+        "type": "unsigned",
+        "description": "\u95a2\u6570\u547c\u3073\u51fa\u3057\u306e\u958b\u59cb\u62ec\u5f27\u306e\u5f8c\u306b\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 30
+    },
+    {
+        "name": "PenaltyBreakComment",
+        "type": "unsigned",
+        "description": "\u30b3\u30e1\u30f3\u30c8\u5185\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 31
+    },
+    {
+        "name": "PenaltyBreakFirstLessLess",
+        "type": "unsigned",
+        "description": "\u6700\u521d\u306e <code><<</code> \u306e\u524d\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 32
+    },
+    {
+        "name": "PenaltyBreakString",
+        "type": "unsigned",
+        "description": "\u6587\u5b57\u5217\u30ea\u30c6\u30e9\u30eb\u5185\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 33
+    },
+    {
+        "name": "PenaltyBreakTemplateDeclaration",
+        "type": "unsigned",
+        "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u5ba3\u8a00\u306e\u5f8c\u3067\u6539\u884c\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 34
+    },
+    {
+        "name": "PenaltyExcessCharacter",
+        "type": "unsigned",
+        "description": "\u6700\u5927\u5217\u6570\u304b\u3089\u306f\u307f\u51fa\u3059\u5834\u5408\u306b\u30011\u6587\u5b57\u3042\u305f\u308a\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 35
+    },
+    {
+        "name": "PenaltyIndentedWhitespace",
+        "type": "unsigned",
+        "description": "\u7a7a\u767d\u30a4\u30f3\u30c7\u30f3\u30c8\u306e\u5404\u6587\u5b57\u306b\u5bfe\u3059\u308b\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002(\u5148\u982d\u306e\u7a7a\u767d\u4ee5\u5916\u306e\u5217\u306b\u5bfe\u3059\u308b\u76f8\u5bfe\u7684\u306a\u30ab\u30a6\u30f3\u30c8)",
+        "category": "Break",
+        "index": 36
+    },
+    {
+        "name": "PenaltyReturnTypeOnItsOwnLine",
+        "type": "unsigned",
+        "description": "\u95a2\u6570\u306e\u623b\u308a\u5024\u306e\u578b\u3092\u540c\u3058\u884c\u306b\u914d\u7f6e\u3057\u305f\u5834\u5408\u306e\u30da\u30ca\u30eb\u30c6\u30a3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "category": "Break",
+        "index": 37
+    },
+    {
+        "name": "PointerAlignment",
+        "type": "enum",
+        "description": "\u30dd\u30a4\u30f3\u30bf\u3068\u53c2\u7167\u306e\u6574\u5217\u30b9\u30bf\u30a4\u30eb\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Left",
+                "description": "\u5de6\u5074\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int* a;</code></pre>"
+            },
+            {
+                "name": "Right",
+                "description": "\u53f3\u5074\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int *a;</code></pre>"
+            },
+            {
+                "name": "Middle",
+                "description": "\u5de6\u5074\u53ca\u3073\u53f3\u5074\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>int * a;</code></pre>"
+            }
+        ],
+        "category": "Space",
+        "index": 23
+    },
+    {
+        "name": "ReflowComments",
+        "type": "bool",
+        "description": "\u30b3\u30e1\u30f3\u30c8\u3092\u6700\u5927\u306e\u5217\u6570\u306b\u5fdc\u3058\u3066\u3001\u81ea\u52d5\u3067\u6539\u884c\u3059\u308b\u304b\u3069\u3046\u304b\u6307\u5b9a\u3059\u308b\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>// comment comment comment comment\n// comment comment\n/* comment comment comment comment\n * comment comment */</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>// comment comment comment comment comment comment\n/* comment comment comment comment comment comment */</code></pre>",
+        "category": "Break",
+        "index": 38
+    },
+    {
+        "name": "SortIncludes",
+        "type": "enum",
+        "description": "<code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u30bd\u30fc\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "<code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u306f\u3001\u30bd\u30fc\u30c8\u3057\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>#include &quot;B/A.h&quot;\n#include &quot;A/B.h&quot;\n#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;B/a.h&quot;</code></pre>"
+            },
+            {
+                "name": "CaseInsensitive",
+                "description": "<code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u306f\u3001\u5927\u6587\u5b57\u5c0f\u6587\u5b57\u3092\u533a\u5225\u305b\u305a\u306b\u30bd\u30fc\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;\n#include &quot;a/b.h&quot;</code></pre>"
+            },
+            {
+                "name": "CaseSensitive",
+                "description": "<code>include</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u306f\u3001\u5927\u6587\u5b57\u5c0f\u6587\u5b57\u3092\u533a\u5225\u3057\u3066\u30bd\u30fc\u30c8\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;a/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;</code></pre>"
+            }
+        ],
+        "category": "Other",
+        "index": 6
+    },
+    {
+        "name": "SortUsingDeclarations",
+        "type": "bool",
+        "description": "<code>using</code> \u30c7\u30a3\u30ec\u30af\u30c6\u30a3\u30d6\u3092\u30bd\u30fc\u30c8\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>using std::cout;\nusing std::cin;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>using std::cin;\nusing std::cout;</code></pre>",
+        "category": "Other",
+        "index": 7
+    },
+    {
+        "name": "SpaceAfterCStyleCast",
+        "type": "bool",
+        "description": "C\u30b9\u30bf\u30a4\u30eb\u306e\u30ad\u30e3\u30b9\u30c8\u306e\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>(int) i;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>(int)i;</code></pre>",
+        "category": "Space",
+        "index": 2
+    },
+    {
+        "name": "SpaceAfterLogicalNot",
+        "type": "bool",
+        "description": "\u5426\u5b9a\u6f14\u7b97\u5b50\u306e\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>! flag;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>!flag;</code></pre>",
+        "category": "Space",
+        "index": 3
+    },
+    {
+        "name": "SpaceAfterTemplateKeyword",
+        "type": "bool",
+        "description": "template \u30ad\u30fc\u30ef\u30fc\u30c9\u306e\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>template &lt;int&gt; void foo();</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>template&lt;int&gt; void foo();</code></pre>",
+        "category": "Space",
+        "index": 4
+    },
+    {
+        "name": "SpaceAroundPointerQualifiers",
+        "type": "enum",
+        "description": "\u30dd\u30a4\u30f3\u30bf\u4fee\u98fe\u5b50\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Default",
+                "description": "\u30dd\u30a4\u30f3\u30bf\u4fee\u98fe\u5b50\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u305a\u3001\u4ee3\u308f\u308a\u306b <code>PointerAlignment</code> \u306b\u5f93\u3044\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Left\nvoid* const* x = NULL;</code></pre>\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Right\nvoid *const *x = NULL;</code></pre>"
+            },
+            {
+                "name": "Before",
+                "description": "\u30dd\u30a4\u30f3\u30bf\u4fee\u98fe\u5b50\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Left\nvoid* const* x = NULL;</code></pre>\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Right\nvoid * const *x = NULL;</code></pre>"
+            },
+            {
+                "name": "After",
+                "description": "\u30dd\u30a4\u30f3\u30bf\u4fee\u98fe\u5b50\u306e\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Left\nvoid* const * x = NULL;</code></pre>\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Right\nvoid *const *x = NULL;</code></pre>"
+            },
+            {
+                "name": "Both",
+                "description": "\u30dd\u30a4\u30f3\u30bf\u4fee\u98fe\u5b50\u306e\u524d\u5f8c\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Left\nvoid* const * x = NULL;</code></pre>\n\n<pre class=\"language-cpp\"><code>// PointerAlignment: Right\nvoid * const *x = NULL;</code></pre>"
+            }
+        ],
+        "category": "Space",
+        "index": 5
+    },
+    {
+        "name": "SpaceBeforeAssignmentOperators",
+        "type": "bool",
+        "description": "\u4ee3\u5165\u6f14\u7b97\u5b50\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>int a = 5;\na += 42;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>int a= 5;\na+= 42;</code></pre>",
+        "category": "Space",
+        "index": 6
+    },
+    {
+        "name": "SpaceBeforeCaseColon",
+        "type": "bool",
+        "description": "case \u30e9\u30d9\u30eb\u306e\u30b3\u30ed\u30f3\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>switch (x) {\n  case 1 : break;\n}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>switch (x) {\n  case 1: break;\n}</code></pre>",
+        "category": "Space",
+        "index": 7
+    },
+    {
+        "name": "SpaceBeforeCpp11BracedList",
+        "type": "bool",
+        "description": "\u521d\u671f\u5316\u5b50\u30ea\u30b9\u30c8\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>Foo foo {bar};\nFoo {};\nvector&lt;int&gt; {1, 2, 3};\nnew int[3] {1, 2, 3};</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>Foo foo{bar};\nFoo{};\nvector&lt;int&gt;{1, 2, 3};\nnew int[3]{1, 2, 3};</code></pre>",
+        "category": "Space",
+        "index": 8
+    },
+    {
+        "name": "SpaceBeforeCtorInitializerColon",
+        "type": "bool",
+        "description": "\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf\u306e\u30e1\u30f3\u30d0\u521d\u671f\u5316\u5b50\u306e\u30b3\u30ed\u30f3\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>Foo::Foo() : a(a) {}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>Foo::Foo(): a(a) {}</code></pre>",
+        "category": "Space",
+        "index": 9
+    },
+    {
+        "name": "SpaceBeforeInheritanceColon",
+        "type": "bool",
+        "description": "\u7d99\u627f\u306e\u30b3\u30ed\u30f3\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>class Foo : Bar {}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>class Foo: Bar {}</code></pre>",
+        "category": "Space",
+        "index": 10
+    },
+    {
+        "name": "SpaceBeforeParens",
+        "type": "enum",
+        "description": "\u958b\u59cb\u4e38\u62ec\u5f27\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u958b\u59cb\u4e38\u62ec\u5f27\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>void function();\nif(flag) {\n    return;\n}</code></pre>"
+            },
+            {
+                "name": "ControlStatements",
+                "description": "if \u53ca\u3073 for \u306a\u3069\u306e\u5236\u5fa1\u69cb\u6587\u306e\u5834\u5408\u306e\u307f\u3001\u958b\u59cb\u4e38\u62ec\u5f27\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void function();\nif (flag) {\n    return;\n}</code></pre>"
+            },
+            {
+                "name": "ControlStatementsExceptForEachMacros",
+                "description": "<code>ControlStatements</code> \u3068\u540c\u69d8\u3067\u3059\u304c\u3001<code>ForEach</code> \u30de\u30af\u30ed\u306b\u306f\u9069\u7528\u3055\u308c\u307e\u305b\u3093\u3002\u3053\u308c\u306f\u3001<code>ForEach</code> \u30de\u30af\u30ed\u304c\u5236\u5fa1\u6587\u3067\u306f\u306a\u304f\u95a2\u6570\u547c\u3073\u51fa\u3057\u3068\u3057\u3066\u6271\u308f\u308c\u308b\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u3067\u6709\u7528\u3067\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void f() {\n  Q_FOREACH(...) {\n    f();\n  }\n}</code></pre>"
+            },
+            {
+                "name": "NonEmptyParentheses",
+                "description": "\u7a7a\u306e\u62ec\u5f27\u3067\u306a\u3044\u5834\u5408\u306e\u307f\u3001\u4e38\u62ec\u5f27\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u305b\u3093\u3002\n\n<pre class=\"language-cpp\"><code>void function (int a, int b, int c);\nvoid function();\nif (flag) {\n    return;\n}</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "\u69cb\u6587\u898f\u5247\u3067\u7981\u6b62\u3055\u308c\u3066\u3044\u308b\u5834\u5408\u3084\u3001\u4ed6\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u3067\u6c7a\u3081\u3089\u308c\u3066\u3044\u308b\u5834\u5408\u3092\u9664\u304d\u3001\u5e38\u306b\u958b\u62ec\u5f27\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>void function ();\nif(flag) {\n    return;\n}</code></pre>"
+            }
+        ],
+        "category": "Space",
+        "index": 11
+    },
+    {
+        "name": "SpaceBeforeRangeBasedForLoopColon",
+        "type": "bool",
+        "description": "<code>range-for</code> \u306e\u30b3\u30ed\u30f3\u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>for (auto v : values) {}</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>for(auto v: values) {}</code></pre>",
+        "category": "Space",
+        "index": 12
+    },
+    {
+        "name": "SpaceBeforeSquareBrackets",
+        "type": "bool",
+        "description": "<code>[</code> \u306e\u524d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u30e9\u30e0\u30c0\u95a2\u6570\u306f\u5f71\u97ff\u3092\u53d7\u3051\u307e\u305b\u3093\u3002<code>true</code> \u306e\u5834\u5408\u3001\u6700\u521d\u306e <code>[</code> \u306e\u307f\u7a7a\u767d\u3092\u5165\u308c\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>int a [5];\nint a [5][5];</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>int a[5];\nint a[5][5];</code></pre>",
+        "category": "Space",
+        "index": 13
+    },
+    {
+        "name": "SpaceInEmptyBlock",
+        "type": "bool",
+        "description": "\u7a7a\u306e\u30d6\u30ed\u30c3\u30af <code>{}</code> \u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>void f() { }\nwhile (true) { }</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>void f() {}\nwhile (true) {}</code></pre>",
+        "category": "Space",
+        "index": 14
+    },
+    {
+        "name": "SpaceInEmptyParentheses",
+        "type": "bool",
+        "description": "\u7a7a\u306e\u4e38\u62ec\u5f27 <code>()</code> \u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>void f( );</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>void f();</code></pre>",
+        "category": "Space",
+        "index": 15
+    },
+    {
+        "name": "SpacesBeforeTrailingComments",
+        "type": "unsigned",
+        "description": "\u672b\u5c3e\u306e\u30b3\u30e1\u30f3\u30c8 (<code>//</code>) \u306e\u524d\u306b\u5165\u308c\u308b\u7a7a\u767d\u306e\u6570\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n<pre class=\"language-cpp\"><code>// SpacesBeforeTrailingComments: 0\nvoid f( );// comment</code></pre>\n\n<pre class=\"language-cpp\"><code>// SpacesBeforeTrailingComments: 4\nvoid f( );    // comment</code></pre>",
+        "category": "Space",
+        "index": 16
+    },
+    {
+        "name": "SpacesInAngles",
+        "type": "bool",
+        "description": "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u306e\u5f15\u6570\u30ea\u30b9\u30c8\u306e\u9264\u62ec\u5f27\u306e\u4e2d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>static_cast&lt; int &gt;(arg);</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>static_cast&lt;int&gt;(arg);</code></pre>",
+        "category": "Space",
+        "index": 17
+    },
+    {
+        "name": "SpacesInCStyleCastParentheses",
+        "type": "bool",
+        "description": "C\u30b9\u30bf\u30a4\u30eb\u306e\u30ad\u30e3\u30b9\u30c8\u306e\u4e2d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>x = ( int )y</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>x = (int)y</code></pre>",
+        "category": "Space",
+        "index": 18
+    },
+    {
+        "name": "SpacesInConditionalStatement",
+        "type": "bool",
+        "description": "if/for/switch/while \u306e\u6761\u4ef6\u5f0f\u306e\u4e2d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>if ( a )  { ... }\nwhile ( i &lt; 5 )  { ... }</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>if (a) { ... }\nwhile (i &lt; 5) { ... }</code></pre>",
+        "category": "Space",
+        "index": 19
+    },
+    {
+        "name": "SpacesInParentheses",
+        "type": "bool",
+        "description": "\u4e38\u62ec\u5f27\u306e\u4e2d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>t f( Deleted &amp; ) &amp; = delete;</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>t f(Deleted &amp;) &amp; = delete;</code></pre>",
+        "category": "Space",
+        "index": 20
+    },
+    {
+        "name": "SpacesInSquareBrackets",
+        "type": "bool",
+        "description": "\u89d2\u62ec\u5f27\u306e\u4e2d\u306b\u7a7a\u767d\u3092\u5165\u308c\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\u5f15\u6570\u306e\u306a\u3044\u30e9\u30e0\u30c0\u3084\u30b5\u30a4\u30ba\u306e\u6307\u5b9a\u3055\u308c\u3066\u3044\u306a\u3044\u914d\u5217\u5ba3\u8a00\u306f\u5f71\u97ff\u3092\u53d7\u3051\u307e\u305b\u3093\u3002\n\ntrue\n<pre class=\"language-cpp\"><code>int a[ 5 ];\nstd::unique_ptr&lt;int[]&gt; foo() {} // \u5f71\u97ff\u3057\u306a\u3044</code></pre>\n\nfalse\n<pre class=\"language-cpp\"><code>int a[5];</code></pre>",
+        "category": "Space",
+        "index": 21
+    },
+    {
+        "name": "Standard",
+        "type": "enum",
+        "description": "C++ \u306e\u30d0\u30fc\u30b8\u30e7\u30f3\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "c++03",
+                "description": "C++03 \u3068\u3057\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "c++11",
+                "description": "C++11 \u3068\u3057\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "c++14",
+                "description": "C++14 \u3068\u3057\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "c++17",
+                "description": "C++17 \u3068\u3057\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "c++20",
+                "description": "C++20 \u3068\u3057\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "Latest",
+                "description": "\u6700\u65b0\u306e\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u308b\u30d0\u30fc\u30b8\u30e7\u30f3\u3092\u4f7f\u3063\u3066\u89e3\u6790\u3057\u3066\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "Auto",
+                "description": "\u30b3\u30fc\u30c9\u306b\u57fa\u3065\u3044\u3066\u81ea\u52d5\u3067\u30d0\u30fc\u30b8\u30e7\u30f3\u3092\u5224\u65ad\u3057\u307e\u3059\u3002"
+            }
+        ],
+        "category": "Common",
+        "index": 4
+    },
+    {
+        "name": "StatementAttributeLikeMacros",
+        "type": "list of string",
+        "description": "Qt \u306e <code>emit</code> \u306e\u3088\u3046\u306b\u3001\u5c5e\u6027\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>unsigned char data = &#x27;x&#x27;;\nemit signal(data);</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>StatementAttributeLikeMacros: [&quot;emit&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 5
+    },
+    {
+        "name": "StatementMacros",
+        "type": "list of string",
+        "description": "\u5b8c\u5168\u306a\u6587\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002\n\n\u30de\u30af\u30ed\u306e\u4f8b\n<pre class=\"language-cpp\"><code>void test(int var)\n{\n    Q_UNUSED(var);\n}</code></pre>\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>StatementMacros: [&quot;Q_UNUSED&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 6
+    },
+    {
+        "name": "TabWidth",
+        "type": "unsigned",
+        "description": "\u30bf\u30d6\u306b\u3088\u308b\u30a4\u30f3\u30c7\u30f3\u30c8\u306e\u5834\u5408\u306e\u5217\u6570\u3002",
+        "category": "Indent",
+        "index": 1
+    },
+    {
+        "name": "TypenameMacros",
+        "type": "list of string",
+        "description": "\u95a2\u6570\u547c\u3073\u51fa\u3057\u3068\u3057\u3066\u3067\u306f\u306a\u304f\u3001\u578b\u5ba3\u8a00\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>TypenameMacros: [&quot;STACK_OF&quot;, &quot;LIST&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 7
+    },
+    {
+        "name": "UseCRLF",
+        "type": "bool",
+        "description": "\u6539\u884c\u306b\u306f\u3001<code>\\n</code> \u306e\u4ee3\u308f\u308a\u306b <code>\\r\\n</code> \u3092\u4f7f\u7528\u3057\u307e\u3059\u3002",
+        "category": "Common",
+        "index": 5
+    },
+    {
+        "name": "UseTab",
+        "type": "enum",
+        "description": "\u30a4\u30f3\u30c7\u30f3\u30c8\u306b\u30bf\u30d6\u3001\u7a7a\u767d\u306e\u3069\u3061\u3089\u3092\u4f7f\u7528\u3059\u308b\u304b\u3069\u3046\u304b\u3092\u6307\u5b9a\u3057\u307e\u3059\u3002",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "\u5e38\u306b\u7a7a\u884c\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "ForIndentation",
+                "description": "\u30a4\u30f3\u30c7\u30f3\u30c8\u306b\u306f\u30bf\u30d6\u306e\u307f\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "ForContinuationAndIndentation",
+                "description": "\u884c\u306e\u5148\u982d\u306e\u30a4\u30f3\u30c7\u30f3\u30c8\u306b\u306f\u30bf\u30d6\u3092\u4f7f\u7528\u3057\u3001\u9023\u7d9a\u3057\u305f\u4ee3\u5165\u3084\u5ba3\u8a00\u306a\u3069\u3092\u6574\u5217\u3059\u308b\u969b\u306b\u306f\u7a7a\u767d\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "AlignWithSpaces",
+                "description": "\u884c\u306e\u7d9a\u304d\u3084\u30a4\u30f3\u30c7\u30f3\u30c8\u306b\u306f\u30bf\u30d6\u3092\u3001\u9023\u7d9a\u3057\u305f\u4ee3\u5165\u3084\u5ba3\u8a00\u306a\u3069\u3092\u6574\u5217\u3059\u308b\u969b\u306b\u306f\u7a7a\u767d\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002"
+            },
+            {
+                "name": "Always",
+                "description": "\u5e38\u306b\u30bf\u30d6\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002"
+            }
+        ],
+        "category": "Indent",
+        "index": 0
+    },
+    {
+        "name": "WhitespaceSensitiveMacros",
+        "type": "list of string",
+        "description": "\u7a7a\u767d\u3068\u3057\u3066\u89e3\u91c8\u3055\u308c\u308b\u3079\u304d\u30de\u30af\u30ed\u306e\u4e00\u89a7\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002\n\n<code>.clang-format</code> \u306e\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u3067\u306f\u3001\u4ee5\u4e0b\u306e\u3088\u3046\u306b\u8a2d\u5b9a\u3067\u304d\u307e\u3059\u3002\n\n<pre class=\"language-yaml\"><code>WhitespaceSensitiveMacros: [&quot;STRINGIZE&quot;, &quot;PP_STRINGIZE&quot;]</code></pre>",
+        "category": "Macro",
+        "index": 8
+    }
+]
