@@ -31,6 +31,10 @@
             {
                 "name": "GNU",
                 "description": "A style complying with the <a href=\"https://www.gnu.org/prep/standards/standards.html\">GNU coding standards</a>"
+            },
+            {
+                "name": "InheritParentConfig",
+                "description": "Not a real style, but allows to use the <code>.clang-format</code> file from the parent directory (or its parent if there is none). If there is no parent file found it falls back to the <code>fallback</code> style, and applies the changes to that."
             }
         ],
         "category": "Common",
@@ -41,7 +45,7 @@
         "type": "int",
         "description": "The extra indent or outdent of access modifiers, e.g. <code>public:</code>.",
         "category": "Indent",
-        "index": 3
+        "index": 1
     },
     {
         "name": "AlignAfterOpenBracket",
@@ -62,7 +66,28 @@
             }
         ],
         "category": "Align",
-        "index": 0
+        "index": 2
+    },
+    {
+        "name": "AlignArrayOfStructures",
+        "type": "enum",
+        "description": "if not <code>None</code>, when using initialization for an array of structs aligns the fields into columns.",
+        "enums": [
+            {
+                "name": "Left",
+                "description": "Align array column and left justify the columns e.g.:\n\n<pre class=\"language-cpp\"><code>struct test demo[] =\n{\n    {56, 23,    &quot;hello&quot;},\n    {-1, 93463, &quot;world&quot;},\n    {7,  5,     &quot;!!&quot;   }\n};</code></pre>"
+            },
+            {
+                "name": "Right",
+                "description": "Align array column and right justify the columns e.g.:\n\n<pre class=\"language-cpp\"><code>struct test demo[] =\n{\n    {56,    23, &quot;hello&quot;},\n    {-1, 93463, &quot;world&quot;},\n    { 7,     5,    &quot;!!&quot;}\n};</code></pre>"
+            },
+            {
+                "name": "None",
+                "description": "Don\u2019t align array initializer columns."
+            }
+        ],
+        "category": "Align",
+        "index": 3
     },
     {
         "name": "AlignConsecutiveAssignments",
@@ -91,7 +116,7 @@
             }
         ],
         "category": "Align",
-        "index": 1
+        "index": 4
     },
     {
         "name": "AlignConsecutiveBitFields",
@@ -120,7 +145,7 @@
             }
         ],
         "category": "Align",
-        "index": 2
+        "index": 5
     },
     {
         "name": "AlignConsecutiveDeclarations",
@@ -149,7 +174,7 @@
             }
         ],
         "category": "Align",
-        "index": 3
+        "index": 6
     },
     {
         "name": "AlignConsecutiveMacros",
@@ -178,7 +203,7 @@
             }
         ],
         "category": "Align",
-        "index": 4
+        "index": 7
     },
     {
         "name": "AlignEscapedNewlines",
@@ -199,7 +224,7 @@
             }
         ],
         "category": "Align",
-        "index": 5
+        "index": 8
     },
     {
         "name": "AlignOperands",
@@ -220,35 +245,28 @@
             }
         ],
         "category": "Align",
-        "index": 6
+        "index": 9
     },
     {
         "name": "AlignTrailingComments",
         "type": "bool",
         "description": "If <code>true</code>, aligns trailing comments.\n\n<pre class=\"language-cpp\"><code>true:                                   false:\nint a;     // My comment a      vs.     int a; // My comment a\nint b = 2; // comment  b                int b = 2; // comment about b</code></pre>",
         "category": "Align",
-        "index": 7
+        "index": 10
     },
     {
         "name": "AllowAllArgumentsOnNextLine",
         "type": "bool",
         "description": "If a function call or braced initializer list doesn\u2019t fit on a line, allow putting all arguments onto the next line, even if <code>BinPackArguments</code> is <code>false</code>.\n\n<pre class=\"language-cpp\"><code>true:\ncallFunction(\n    a, b, c, d);\n\nfalse:\ncallFunction(a,\n             b,\n             c,\n             d);</code></pre>",
         "category": "Break",
-        "index": 0
-    },
-    {
-        "name": "AllowAllConstructorInitializersOnNextLine",
-        "type": "bool",
-        "description": "If a constructor definition with a member initializer list doesn\u2019t fit on a single line, allow putting all member initializers onto the next line, if <code>`ConstructorInitializerAllOnOneLineOrOnePerLine`</code> is true. Note that this parameter has no effect if <code>`ConstructorInitializerAllOnOneLineOrOnePerLine`</code> is false.\n\n<pre class=\"language-cpp\"><code>true:\nMyClass::MyClass() :\n    member0(0), member1(2) {}\n\nfalse:\nMyClass::MyClass() :\n    member0(0),\n    member1(2) {}</code></pre>",
-        "category": "Break",
-        "index": 2
+        "index": 11
     },
     {
         "name": "AllowAllParametersOfDeclarationOnNextLine",
         "type": "bool",
         "description": "If the function declaration doesn\u2019t fit on a line, allow putting all parameters of a function declaration onto the next line even if <code>BinPackParameters</code> is <code>false</code>.\n\n<pre class=\"language-cpp\"><code>true:\nvoid myFunction(\n    int a, int b, int c, int d, int e);\n\nfalse:\nvoid myFunction(int a,\n                int b,\n                int c,\n                int d,\n                int e);</code></pre>",
         "category": "Break",
-        "index": 3
+        "index": 12
     },
     {
         "name": "AllowShortBlocksOnASingleLine",
@@ -269,21 +287,21 @@
             }
         ],
         "category": "SingleLine",
-        "index": 0
+        "index": 13
     },
     {
         "name": "AllowShortCaseLabelsOnASingleLine",
         "type": "bool",
         "description": "If <code>true</code>, short case labels will be contracted to a single line.\n\n<pre class=\"language-cpp\"><code>true:                                   false:\nswitch (a) {                    vs.     switch (a) {\ncase 1: x = 1; break;                   case 1:\ncase 2: return;                           x = 1;\n}                                         break;\n                                        case 2:\n                                          return;\n                                        }</code></pre>",
         "category": "SingleLine",
-        "index": 1
+        "index": 14
     },
     {
         "name": "AllowShortEnumsOnASingleLine",
         "type": "bool",
-        "description": "Allow short enums on a single line.\n\n<pre class=\"language-cpp\"><code>true:\nenum { A, B } myEnum;\n\nfalse:\nenum\n{\n  A,\n  B\n} myEnum;</code></pre>",
+        "description": "Allow short enums on a single line.\n\n<pre class=\"language-cpp\"><code>true:\nenum { A, B } myEnum;\n\nfalse:\nenum {\n  A,\n  B\n} myEnum;</code></pre>",
         "category": "SingleLine",
-        "index": 2
+        "index": 15
     },
     {
         "name": "AllowShortFunctionsOnASingleLine",
@@ -312,28 +330,32 @@
             }
         ],
         "category": "SingleLine",
-        "index": 3
+        "index": 16
     },
     {
         "name": "AllowShortIfStatementsOnASingleLine",
         "type": "enum",
-        "description": "If <code>true</code>, <code>if (a) return;</code> can be put on a single line.",
+        "description": "Dependent on the value, <code>if (a) return;</code> can be put on a single line.",
         "enums": [
             {
                 "name": "Never",
-                "description": "Never put short ifs on the same line.\n\n<pre class=\"language-cpp\"><code>if (a)\n  return ;\nelse {\n  return;\n}</code></pre>"
+                "description": "Never put short ifs on the same line.\n\n<pre class=\"language-cpp\"><code>if (a)\n  return;\n\nif (b)\n  return;\nelse\n  return;\n\nif (c)\n  return;\nelse {\n  return;\n}</code></pre>"
             },
             {
                 "name": "WithoutElse",
-                "description": "Without else put short ifs on the same line only if the else is not a compound statement.\n\n<pre class=\"language-cpp\"><code>if (a) return;\nelse\n  return;</code></pre>"
+                "description": "Put short ifs on the same line only if there is no else statement.\n\n<pre class=\"language-cpp\"><code>if (a) return;\n\nif (b)\n  return;\nelse\n  return;\n\nif (c)\n  return;\nelse {\n  return;\n}</code></pre>"
             },
             {
-                "name": "Always",
-                "description": "Always put short ifs on the same line if the else is not a compound statement or not.\n\n<pre class=\"language-cpp\"><code>if (a) return;\nelse {\n  return;\n}</code></pre>"
+                "name": "OnlyFirstIf",
+                "description": "Put short ifs, but not else ifs nor else statements, on the same line.\n\n<pre class=\"language-cpp\"><code>if (a) return;\n\nif (b) return;\nelse if (b)\n  return;\nelse\n  return;\n\nif (c) return;\nelse {\n  return;\n}</code></pre>"
+            },
+            {
+                "name": "AllIfsAndElse",
+                "description": "Always put short ifs, else ifs and else statements on the same line.\n\n<pre class=\"language-cpp\"><code>if (a) return;\n\nif (b) return;\nelse return;\n\nif (c) return;\nelse {\n  return;\n}</code></pre>"
             }
         ],
         "category": "SingleLine",
-        "index": 4
+        "index": 17
     },
     {
         "name": "AllowShortLambdasOnASingleLine",
@@ -358,14 +380,14 @@
             }
         ],
         "category": "SingleLine",
-        "index": 5
+        "index": 18
     },
     {
         "name": "AllowShortLoopsOnASingleLine",
         "type": "bool",
         "description": "If <code>true</code>, <code>while (true) continue;</code> can be put on a single line.",
         "category": "SingleLine",
-        "index": 6
+        "index": 19
     },
     {
         "name": "AlwaysBreakAfterReturnType",
@@ -394,14 +416,14 @@
             }
         ],
         "category": "Break",
-        "index": 5
+        "index": 20
     },
     {
         "name": "AlwaysBreakBeforeMultilineStrings",
         "type": "bool",
         "description": "If <code>true</code>, always break before multiline string literals. This flag is mean to make cases where there are multiple multiline strings in a file look more consistent. Thus, it will only take effect if wrapping the string at that point leads to it being indented <code>ContinuationIndentWidth</code> spaces from the start of the line.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\naaaa =                         vs.     aaaa = &quot;bbbb&quot;\n    &quot;bbbb&quot;                                    &quot;cccc&quot;;\n    &quot;cccc&quot;;</code></pre>",
         "category": "Break",
-        "index": 6
+        "index": 21
     },
     {
         "name": "AlwaysBreakTemplateDeclarations",
@@ -422,28 +444,28 @@
             }
         ],
         "category": "Break",
-        "index": 7
+        "index": 22
     },
     {
         "name": "AttributeMacros",
         "type": "list of string",
-        "description": "A vector of strings that should be interpreted as attributes/qualifiers instead of identifiers. This can be useful for language extensions or static analyzer annotations. For example:\n\n<pre class=\"language-cpp\"><code>x = (char *__capability)&amp;y;\nint function(void) __ununsed;\nvoid only_writes_to_buffer(char *__output buffer);</code></pre> In the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>AttributeMacros: [&quot;__capability&quot;, &quot;__output&quot;, &quot;__ununsed&quot;]</code></pre>",
+        "description": "A vector of strings that should be interpreted as attributes/qualifiers instead of identifiers. This can be useful for language extensions or static analyzer annotations. For example:\n\n<pre class=\"language-cpp\"><code>x = (char *__capability)&amp;y;\nint function(void) __ununsed;\nvoid only_writes_to_buffer(char *__output buffer);</code></pre>\n\nIn the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>AttributeMacros: [&quot;__capability&quot;, &quot;__output&quot;, &quot;__ununsed&quot;]</code></pre>",
         "category": "Macro",
-        "index": 0
+        "index": 23
     },
     {
         "name": "BinPackArguments",
         "type": "bool",
         "description": "If <code>false</code>, a function call\u2019s arguments will either be all on the same line or will have one line each.\n\n<pre class=\"language-cpp\"><code>true:\nvoid f() {\n  f(aaaaaaaaaaaaaaaaaaaa, aaaaaaaaaaaaaaaaaaaa,\n    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa);\n}\n\nfalse:\nvoid f() {\n  f(aaaaaaaaaaaaaaaaaaaa,\n    aaaaaaaaaaaaaaaaaaaa,\n    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa);\n}</code></pre>",
         "category": "Break",
-        "index": 1
+        "index": 24
     },
     {
         "name": "BinPackParameters",
         "type": "bool",
         "description": "If <code>false</code>, a function declaration\u2019s or function definition\u2019s parameters will either all be on the same line or will have one line each.\n\n<pre class=\"language-cpp\"><code>true:\nvoid f(int aaaaaaaaaaaaaaaaaaaa, int aaaaaaaaaaaaaaaaaaaa,\n       int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa) {}\n\nfalse:\nvoid f(int aaaaaaaaaaaaaaaaaaaa,\n       int aaaaaaaaaaaaaaaaaaaa,\n       int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa) {}</code></pre>",
         "category": "Break",
-        "index": 4
+        "index": 25
     },
     {
         "name": "BitFieldColonSpacing",
@@ -468,7 +490,7 @@
             }
         ],
         "category": "Space",
-        "index": 0
+        "index": 26
     },
     {
         "name": "AfterCaseLabel",
@@ -476,7 +498,7 @@
         "description": "Wrap case labels.\n\n<pre class=\"language-cpp\"><code>false:                                true:\nswitch (foo) {                vs.     switch (foo) {\n  case 1: {                             case 1:\n    bar();                              {\n    break;                                bar();\n  }                                       break;\n  default: {                            }\n    plop();                             default:\n  }                                     {\n}                                         plop();\n                                        }\n                                      }</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 8
+        "index": 27
     },
     {
         "name": "AfterClass",
@@ -484,7 +506,7 @@
         "description": "Wrap class definitions.\n\n<pre class=\"language-cpp\"><code>true:\nclass foo {};\n\nfalse:\nclass foo\n{};</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 9
+        "index": 28
     },
     {
         "name": "AfterControlStatement",
@@ -506,7 +528,7 @@
         ],
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 10
+        "index": 29
     },
     {
         "name": "AfterEnum",
@@ -514,7 +536,7 @@
         "description": "Wrap enum definitions.\n\n<pre class=\"language-cpp\"><code>true:\nenum X : int\n{\n  B\n};\n\nfalse:\nenum X : int { B };</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 11
+        "index": 30
     },
     {
         "name": "AfterFunction",
@@ -522,7 +544,7 @@
         "description": "Wrap function definitions.\n\n<pre class=\"language-cpp\"><code>true:\nvoid foo()\n{\n  bar();\n  bar2();\n}\n\nfalse:\nvoid foo() {\n  bar();\n  bar2();\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 12
+        "index": 31
     },
     {
         "name": "AfterNamespace",
@@ -530,7 +552,7 @@
         "description": "Wrap namespace definitions.\n\n<pre class=\"language-cpp\"><code>true:\nnamespace\n{\nint foo();\nint bar();\n}\n\nfalse:\nnamespace {\nint foo();\nint bar();\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 13
+        "index": 32
     },
     {
         "name": "AfterStruct",
@@ -538,7 +560,7 @@
         "description": "Wrap struct definitions.\n\n<pre class=\"language-cpp\"><code>true:\nstruct foo\n{\n  int x;\n};\n\nfalse:\nstruct foo {\n  int x;\n};</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 14
+        "index": 33
     },
     {
         "name": "AfterUnion",
@@ -546,7 +568,7 @@
         "description": "Wrap union definitions.\n\n<pre class=\"language-cpp\"><code>true:\nunion foo\n{\n  int x;\n}\n\nfalse:\nunion foo {\n  int x;\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 15
+        "index": 34
     },
     {
         "name": "AfterExternBlock",
@@ -554,7 +576,7 @@
         "description": "Wrap extern blocks.\n\n<pre class=\"language-cpp\"><code>true:\nextern &quot;C&quot;\n{\n  int foo();\n}\n\nfalse:\nextern &quot;C&quot; {\nint foo();\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 16
+        "index": 35
     },
     {
         "name": "BeforeCatch",
@@ -562,7 +584,7 @@
         "description": "Wrap before <code>catch</code>.\n\n<pre class=\"language-cpp\"><code>true:\ntry {\n  foo();\n}\ncatch () {\n}\n\nfalse:\ntry {\n  foo();\n} catch () {\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 17
+        "index": 36
     },
     {
         "name": "BeforeElse",
@@ -570,7 +592,7 @@
         "description": "Wrap before <code>else</code>.\n\n<pre class=\"language-cpp\"><code>true:\nif (foo()) {\n}\nelse {\n}\n\nfalse:\nif (foo()) {\n} else {\n}</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 18
+        "index": 37
     },
     {
         "name": "BeforeLambdaBody",
@@ -578,7 +600,7 @@
         "description": "Wrap lambda block.\n\n<pre class=\"language-cpp\"><code>true:\nconnect(\n  []()\n  {\n    foo();\n    bar();\n  });\n\nfalse:\nconnect([]() {\n  foo();\n  bar();\n});</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 19
+        "index": 38
     },
     {
         "name": "BeforeWhile",
@@ -586,7 +608,7 @@
         "description": "Wrap before <code>while</code>.\n\n<pre class=\"language-cpp\"><code>true:\ndo {\n  foo();\n}\nwhile (1);\n\nfalse:\ndo {\n  foo();\n} while (1);</code></pre>",
         "parent": "BraceWrapping",
         "category": "Break",
-        "index": 20
+        "index": 39
     },
     {
         "name": "IndentBraces",
@@ -594,7 +616,7 @@
         "description": "Indent the wrapped braces themselves.",
         "parent": "BraceWrapping",
         "category": "Indent",
-        "index": 6
+        "index": 40
     },
     {
         "name": "SplitEmptyFunction",
@@ -602,7 +624,7 @@
         "description": "If <code>false</code>, empty function body can be put on a single line. This option is used only if the opening brace of the function has already been wrapped, i.e. the <cite>AfterFunction</cite> brace wrapping mode is set, and the function could/should not be put on a single line (as per <cite>AllowShortFunctionsOnASingleLine</cite> and constructor formatting options).\n\n<pre class=\"language-cpp\"><code>int f()   vs.   int f()\n{}              {\n                }</code></pre>",
         "parent": "BraceWrapping",
         "category": "SingleLine",
-        "index": 7
+        "index": 41
     },
     {
         "name": "SplitEmptyRecord",
@@ -610,7 +632,7 @@
         "description": "If <code>false</code>, empty record (e.g. class, struct or union) body can be put on a single line. This option is used only if the opening brace of the record has already been wrapped, i.e. the <cite>AfterClass</cite> (for classes) brace wrapping mode is set.\n\n<pre class=\"language-cpp\"><code>class Foo   vs.  class Foo\n{}               {\n                 }</code></pre>",
         "parent": "BraceWrapping",
         "category": "SingleLine",
-        "index": 8
+        "index": 42
     },
     {
         "name": "SplitEmptyNamespace",
@@ -618,7 +640,7 @@
         "description": "If <code>false</code>, empty namespace body can be put on a single line. This option is used only if the opening brace of the namespace has already been wrapped, i.e. the <cite>AfterNamespace</cite> brace wrapping mode is set.\n\n<pre class=\"language-cpp\"><code>namespace Foo   vs.  namespace Foo\n{}                   {\n                     }</code></pre>",
         "parent": "BraceWrapping",
         "category": "SingleLine",
-        "index": 9
+        "index": 43
     },
     {
         "name": "BreakBeforeBinaryOperators",
@@ -639,7 +661,7 @@
             }
         ],
         "category": "Break",
-        "index": 21
+        "index": 44
     },
     {
         "name": "BreakBeforeBraces",
@@ -684,26 +706,26 @@
             }
         ],
         "category": "Break",
-        "index": 22
+        "index": 45
     },
     {
         "name": "BreakBeforeConceptDeclarations",
         "type": "bool",
         "description": "If <code>true</code>, concept will be placed on a new line.\n\n<pre class=\"language-cpp\"><code>true:\n template&lt;typename T&gt;\n concept ...\n\nfalse:\n template&lt;typename T&gt; concept ...</code></pre>",
         "category": "Break",
-        "index": 23
+        "index": 46
     },
     {
         "name": "BreakBeforeTernaryOperators",
         "type": "bool",
         "description": "If <code>true</code>, ternary operators will be placed after line breaks.\n\n<pre class=\"language-cpp\"><code>true:\nveryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription\n    ? firstValue\n    : SecondValueVeryVeryVeryVeryLong;\n\nfalse:\nveryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription ?\n    firstValue :\n    SecondValueVeryVeryVeryVeryLong;</code></pre>",
         "category": "Break",
-        "index": 24
+        "index": 47
     },
     {
         "name": "BreakConstructorInitializers",
         "type": "enum",
-        "description": "The constructor initializers style to use.",
+        "description": "The break constructor initializers style to use.",
         "enums": [
             {
                 "name": "BeforeColon",
@@ -719,7 +741,7 @@
             }
         ],
         "category": "Break",
-        "index": 25
+        "index": 48
     },
     {
         "name": "BreakInheritanceList",
@@ -737,87 +759,105 @@
             {
                 "name": "AfterColon",
                 "description": "Break inheritance list after the colon and commas.\n\n<pre class=\"language-cpp\"><code>class Foo :\n    Base1,\n    Base2\n{};</code></pre>"
+            },
+            {
+                "name": "AfterComma",
+                "description": "Break inheritance list only after the commas.\n\n<pre class=\"language-cpp\"><code>class Foo : Base1,\n            Base2\n{};</code></pre>"
             }
         ],
         "category": "Break",
-        "index": 26
+        "index": 49
     },
     {
         "name": "BreakStringLiterals",
         "type": "bool",
         "description": "Allow breaking string literals when formatting.\n\n<pre class=\"language-cpp\"><code>true:\nconst char* x = &quot;veryVeryVeryVeryVeryVe&quot;\n                &quot;ryVeryVeryVeryVeryVery&quot;\n                &quot;VeryLongString&quot;;\n\nfalse:\nconst char* x =\n  &quot;veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongString&quot;;</code></pre>",
         "category": "Break",
-        "index": 27
+        "index": 50
     },
     {
         "name": "ColumnLimit",
         "type": "unsigned",
         "description": "The column limit. A column limit of <code>0</code> means that there is no column limit. In this case, clang-format will respect the input\u2019s line breaking decisions within statements unless they contradict other rules.",
         "category": "Common",
-        "index": 1
+        "index": 51
     },
     {
         "name": "CommentPragmas",
         "type": "string",
         "description": "A regular expression that describes comments with special meaning, which should not be split into lines or otherwise changed.\n\n<pre class=\"language-cpp\"><code>// CommentPragmas: &#x27;^ FOOBAR pragma:&#x27;\n// Will leave the following line unaffected\n#include &lt;vector&gt; // FOOBAR pragma: keep</code></pre>",
         "category": "Break",
-        "index": 28
+        "index": 52
     },
     {
         "name": "CompactNamespaces",
         "type": "bool",
         "description": "If <code>true</code>, consecutive namespace declarations will be on the same line. If <code>false</code>, each namespace is declared on a new line.\n\n<pre class=\"language-cpp\"><code>true:\nnamespace Foo { namespace Bar {\n}}\n\nfalse:\nnamespace Foo {\nnamespace Bar {\n}\n}</code></pre>\n\nIf it does not fit on a single line, the overflowing namespaces get wrapped:\n\n<pre class=\"language-cpp\"><code>namespace Foo { namespace Bar {\nnamespace Extra {\n}}}</code></pre>",
         "category": "SingleLine",
-        "index": 10
-    },
-    {
-        "name": "ConstructorInitializerAllOnOneLineOrOnePerLine",
-        "type": "bool",
-        "description": "If the constructor initializers don\u2019t fit on a line, put each initializer on its own line.\n\n<pre class=\"language-cpp\"><code>true:\nSomeClass::Constructor()\n    : aaaaaaaa(aaaaaaaa), aaaaaaaa(aaaaaaaa), aaaaaaaa(aaaaaaaaaaaaaaaaaaaaaaaaa) {\n  return 0;\n}\n\nfalse:\nSomeClass::Constructor()\n    : aaaaaaaa(aaaaaaaa), aaaaaaaa(aaaaaaaa),\n      aaaaaaaa(aaaaaaaaaaaaaaaaaaaaaaaaa) {\n  return 0;\n}</code></pre>",
-        "category": "SingleLine",
-        "index": 11
+        "index": 53
     },
     {
         "name": "ConstructorInitializerIndentWidth",
         "type": "unsigned",
         "description": "The number of characters to use for indentation of constructor initializer lists as well as inheritance lists.",
         "category": "Indent",
-        "index": 4
+        "index": 54
     },
     {
         "name": "ContinuationIndentWidth",
         "type": "unsigned",
         "description": "Indent width for line continuations.\n\n<pre class=\"language-cpp\"><code>ContinuationIndentWidth: 2\n\nint i =         //  VeryVeryVeryVeryVeryLongComment\n  longFunction( // Again a long comment\n    arg);</code></pre>",
         "category": "Indent",
-        "index": 5
+        "index": 55
     },
     {
         "name": "Cpp11BracedListStyle",
         "type": "bool",
         "description": "If <code>true</code>, format braced lists as best suited for C++11 braced lists. Important differences: - No spaces inside the braced list. - No line break before the closing brace. - Indentation with the continuation indent, not with the block indent. Fundamentally, C++11 braced lists are formatted exactly like function calls would be formatted in their place. If the braced list follows a name (e.g. a type or variable name), clang-format formats as if the <code>{}</code> were the parentheses of a function call with that name. If there is no name, a zero-length name is assumed.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nvector&lt;int&gt; x{1, 2, 3, 4};     vs.     vector&lt;int&gt; x{ 1, 2, 3, 4 };\nvector&lt;T&gt; x{{}, {}, {}, {}};           vector&lt;T&gt; x{ {}, {}, {}, {} };\nf(MyMap[{composite, key}]);            f(MyMap[{ composite, key }]);\nnew int[3]{1, 2, 3};                   new int[3]{ 1, 2, 3 };</code></pre>",
         "category": "Space",
-        "index": 1
+        "index": 56
     },
     {
         "name": "DeriveLineEnding",
         "type": "bool",
         "description": "Analyze the formatted file for the most used line ending ( <code>\\r\\n</code> or <code>\\n</code> ). <code>UseCRLF</code> is only used as a fallback if none can be derived.",
         "category": "Common",
-        "index": 2
+        "index": 57
     },
     {
         "name": "DerivePointerAlignment",
         "type": "bool",
         "description": "If <code>true</code>, analyze the formatted file for the most common alignment of <code>&</code> and <code>*</code>. Pointer and reference alignment styles are going to be updated according to the preferences found in the file. <code>PointerAlignment</code> is then used only as fallback.",
         "category": "Space",
-        "index": 22
+        "index": 58
     },
     {
         "name": "DisableFormat",
         "type": "bool",
         "description": "Disables formatting completely.",
         "category": "Other",
-        "index": 0
+        "index": 59
+    },
+    {
+        "name": "EmptyLineAfterAccessModifier",
+        "type": "enum",
+        "description": "Defines when to put an empty line after access modifiers. <code>EmptyLineBeforeAccessModifier</code> configuration handles the number of empty lines between two access modifiers.",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "Remove all empty lines after access modifiers.\n\n<pre class=\"language-cpp\"><code>struct foo {\nprivate:\n  int i;\nprotected:\n  int j;\n  /* comment */\npublic:\n  foo() {}\nprivate:\nprotected:\n};</code></pre>"
+            },
+            {
+                "name": "Leave",
+                "description": "Keep existing empty lines after access modifiers. MaxEmptyLinesToKeep is applied instead."
+            },
+            {
+                "name": "Always",
+                "description": "Always add empty line after access modifiers if there are none. MaxEmptyLinesToKeep is applied also.\n\n<pre class=\"language-cpp\"><code>struct foo {\nprivate:\n\n  int i;\nprotected:\n\n  int j;\n  /* comment */\npublic:\n\n  foo() {}\nprivate:\n\nprotected:\n\n};</code></pre>"
+            }
+        ],
+        "category": "Indent",
+        "index": 60
     },
     {
         "name": "EmptyLineBeforeAccessModifier",
@@ -842,21 +882,21 @@
             }
         ],
         "category": "Other",
-        "index": 1
+        "index": 61
     },
     {
         "name": "FixNamespaceComments",
         "type": "bool",
-        "description": "If <code>true</code>, clang-format adds missing namespace end comments and fixes invalid existing ones.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nnamespace a {                  vs.     namespace a {\nfoo();                                 foo();\n} // namespace a                       }</code></pre>",
+        "description": "If <code>true</code>, clang-format adds missing namespace end comments for short namespaces and fixes invalid existing ones. Short ones are controlled by \u201cShortNamespaceLines\u201d.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nnamespace a {                  vs.     namespace a {\nfoo();                                 foo();\nbar();                                 bar();\n} // namespace a                       }</code></pre>",
         "category": "Other",
-        "index": 2
+        "index": 62
     },
     {
         "name": "ForEachMacros",
         "type": "list of string",
         "description": "A vector of macros that should be interpreted as foreach loops instead of as function calls. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>FOREACH(&lt;variable-declaration&gt;, ...)\n  &lt;loop-body&gt;</code></pre>\n\nIn the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>ForEachMacros: [&quot;RANGES_FOR&quot;, &quot;FOREACH&quot;]</code></pre>\n\nFor example: BOOST_FOREACH.",
         "category": "Macro",
-        "index": 1
+        "index": 63
     },
     {
         "name": "IncludeBlocks",
@@ -877,21 +917,28 @@
             }
         ],
         "category": "Other",
-        "index": 3
+        "index": 64
+    },
+    {
+        "name": "IndentAccessModifiers",
+        "type": "bool",
+        "description": "Specify whether access modifiers should have their own indentation level. When <code>false</code>, access modifiers are indented (or outdented) relative to the record members, respecting the <code>AccessModifierOffset</code>. Record members are indented one level below the record. When <code>true</code>, access modifiers get their own indentation level. As a consequence, record members are always indented 2 levels below the record, regardless of the access modifier presence. Value of the <code>AccessModifierOffset</code> is ignored.\n\n<pre class=\"language-cpp\"><code>false:                                 true:\nclass C {                      vs.     class C {\n  class D {                                class D {\n    void bar();                                void bar();\n  protected:                                 protected:\n    D();                                       D();\n  };                                       };\npublic:                                  public:\n  C();                                     C();\n};                                     };\nvoid foo() {                           void foo() {\n  return 1;                              return 1;\n}                                      }</code></pre>",
+        "category": "Indent",
+        "index": 65
     },
     {
         "name": "IndentCaseBlocks",
         "type": "bool",
         "description": "Indent case label blocks one level from the case label. When <code>false</code>, the block following the case label uses the same indentation level as for the case label, treating the case label the same as an if-statement. When <code>true</code>, the block gets indented as a scope block.\n\n<pre class=\"language-cpp\"><code>false:                                 true:\nswitch (fool) {                vs.     switch (fool) {\ncase 1: {                              case 1:\n  bar();                                 {\n} break;                                   bar();\ndefault: {                               }\n  plop();                                break;\n}                                      default:\n}                                        {\n                                           plop();\n                                         }\n                                       }</code></pre>",
         "category": "Indent",
-        "index": 7
+        "index": 66
     },
     {
         "name": "IndentCaseLabels",
         "type": "bool",
         "description": "Indent case labels one level from the switch statement. When <code>false</code>, use the same indentation level as for the switch statement. Switch statement body is always indented one level more than case labels (except the first block following the case label, which itself indents the code - unless IndentCaseBlocks is enabled).\n\n<pre class=\"language-cpp\"><code>false:                                 true:\nswitch (fool) {                vs.     switch (fool) {\ncase 1:                                  case 1:\n  bar();                                   bar();\n  break;                                   break;\ndefault:                                 default:\n  plop();                                  plop();\n}                                      }</code></pre>",
         "category": "Indent",
-        "index": 8
+        "index": 67
     },
     {
         "name": "IndentExternBlock",
@@ -912,14 +959,14 @@
             }
         ],
         "category": "Indent",
-        "index": 9
+        "index": 68
     },
     {
         "name": "IndentGotoLabels",
         "type": "bool",
         "description": "Indent goto labels. When <code>false</code>, goto labels are flushed left.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nint f() {                      vs.     int f() {\n  if (foo()) {                           if (foo()) {\n  label1:                              label1:\n    bar();                                 bar();\n  }                                      }\nlabel2:                                label2:\n  return 1;                              return 1;\n}                                      }</code></pre>",
         "category": "Indent",
-        "index": 10
+        "index": 69
     },
     {
         "name": "IndentPPDirectives",
@@ -940,35 +987,52 @@
             }
         ],
         "category": "Indent",
-        "index": 11
+        "index": 70
     },
     {
         "name": "IndentRequires",
         "type": "bool",
         "description": "Indent the requires clause in a template\n\n<pre class=\"language-cpp\"><code>true:\ntemplate &lt;typename It&gt;\n  requires Iterator&lt;It&gt;\nvoid sort(It begin, It end) {\n  //....\n}\n\nfalse:\ntemplate &lt;typename It&gt;\nrequires Iterator&lt;It&gt;\nvoid sort(It begin, It end) {\n  //....\n}</code></pre>",
         "category": "Indent",
-        "index": 12
+        "index": 71
     },
     {
         "name": "IndentWidth",
         "type": "unsigned",
         "description": "The number of columns to use for indentation.\n\n<pre class=\"language-cpp\"><code>IndentWidth: 3\n\nvoid f() {\n   someFunction();\n   if (true, false) {\n      f();\n   }\n}</code></pre>",
         "category": "Indent",
-        "index": 2
+        "index": 72
     },
     {
         "name": "IndentWrappedFunctionNames",
         "type": "bool",
         "description": "Indent if a function definition or declaration is wrapped after the type.\n\n<pre class=\"language-cpp\"><code>true:\nLoooooooooooooooooooooooooooooooooooooooongReturnType\n    LoooooooooooooooooooooooooooooooongFunctionDeclaration();\n\nfalse:\nLoooooooooooooooooooooooooooooooooooooooongReturnType\nLoooooooooooooooooooooooooooooooongFunctionDeclaration();</code></pre>",
         "category": "Indent",
-        "index": 13
+        "index": 73
     },
     {
         "name": "KeepEmptyLinesAtTheStartOfBlocks",
         "type": "bool",
         "description": "If true, the empty line at the start of blocks is kept.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nif (foo) {                     vs.     if (foo) {\n                                         bar();\n  bar();                               }\n}</code></pre>",
         "category": "Other",
-        "index": 4
+        "index": 74
+    },
+    {
+        "name": "LambdaBodyIndentation",
+        "type": "enum",
+        "description": "The indentation style of lambda bodies. <code>Signature</code> (the default) causes the lambda body to be indented one additional level relative to the indentation level of the signature. <code>OuterScope</code> forces the lambda body to be indented one additional level relative to the parent scope containing the lambda signature. For callback-heavy code, it may improve readability to have the signature indented two levels and to use <code>OuterScope</code>. The KJ style guide requires <code>OuterScope</code>. <a href=\"https://github.com/capnproto/capnproto/blob/master/kjdoc/style-guide.md\">KJ style guide</a>",
+        "enums": [
+            {
+                "name": "Signature",
+                "description": "Align lambda body relative to the lambda signature. This is the default.\n\n<pre class=\"language-cpp\"><code>someMethod(\n    [](SomeReallyLongLambdaSignatureArgument foo) {\n      return;\n    });</code></pre>"
+            },
+            {
+                "name": "OuterScope",
+                "description": "Align lambda body relative to the indentation level of the outer scope the lambda signature resides in.\n\n<pre class=\"language-cpp\"><code>someMethod(\n    [](SomeReallyLongLambdaSignatureArgument foo) {\n  return;\n});</code></pre>"
+            }
+        ],
+        "category": "Indent",
+        "index": 75
     },
     {
         "name": "Language",
@@ -996,6 +1060,10 @@
                 "description": "Should be used for JavaScript."
             },
             {
+                "name": "Json",
+                "description": "Should be used for JSON."
+            },
+            {
                 "name": "ObjC",
                 "description": "Should be used for Objective-C, Objective-C++."
             },
@@ -1013,28 +1081,28 @@
             }
         ],
         "category": "Common",
-        "index": 3
+        "index": 76
     },
     {
         "name": "MacroBlockBegin",
         "type": "string",
         "description": "A regular expression matching macros that start a block.\n\n<pre class=\"language-cpp\"><code># With:\nMacroBlockBegin: &quot;^NS_MAP_BEGIN|\\\nNS_TABLE_HEAD$&quot;\nMacroBlockEnd: &quot;^\\\nNS_MAP_END|\\\nNS_TABLE_.*_END$&quot;\n\nNS_MAP_BEGIN\n  foo();\nNS_MAP_END\n\nNS_TABLE_HEAD\n  bar();\nNS_TABLE_FOO_END\n\n# Without:\nNS_MAP_BEGIN\nfoo();\nNS_MAP_END\n\nNS_TABLE_HEAD\nbar();\nNS_TABLE_FOO_END</code></pre>",
         "category": "Macro",
-        "index": 2
+        "index": 77
     },
     {
         "name": "MacroBlockEnd",
         "type": "string",
         "description": "A regular expression matching macros that end a block.",
         "category": "Macro",
-        "index": 3
+        "index": 78
     },
     {
         "name": "MaxEmptyLinesToKeep",
         "type": "unsigned",
         "description": "The maximum number of consecutive empty lines to keep.\n\n<pre class=\"language-cpp\"><code>MaxEmptyLinesToKeep: 1         vs.     MaxEmptyLinesToKeep: 0\nint f() {                              int f() {\n  int = 1;                                 int i = 1;\n                                           i = foo();\n  i = foo();                               return i;\n                                       }\n  return i;\n}</code></pre>",
         "category": "Other",
-        "index": 5
+        "index": 79
     },
     {
         "name": "NamespaceIndentation",
@@ -1055,77 +1123,109 @@
             }
         ],
         "category": "Indent",
-        "index": 14
+        "index": 80
     },
     {
         "name": "NamespaceMacros",
         "type": "list of string",
-        "description": "A vector of macros which are used to open namespace blocks. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>NAMESPACE(&lt;namespace-name&gt;, ...) {\n  &lt;namespace-content&gt;\n}</code></pre> For example: TESTSUITE",
+        "description": "A vector of macros which are used to open namespace blocks. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>NAMESPACE(&lt;namespace-name&gt;, ...) {\n  &lt;namespace-content&gt;\n}</code></pre>\n\nFor example: TESTSUITE",
         "category": "Macro",
-        "index": 4
+        "index": 81
+    },
+    {
+        "name": "PPIndentWidth",
+        "type": "int",
+        "description": "The number of columns to use for indentation of preprocessor statements. When set to -1 (default) <code>IndentWidth</code> is used also for preprocessor statements.\n\n<pre class=\"language-cpp\"><code>PPIndentWidth: 1\n\n#ifdef __linux__\n# define FOO\n#else\n# define BAR\n#endif</code></pre>",
+        "category": "Indent",
+        "index": 82
+    },
+    {
+        "name": "PackConstructorInitializers",
+        "type": "enum",
+        "description": "The pack constructor initializers style to use.",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "Always put each constructor initializer on its own line.\n\n<pre class=\"language-cpp\"><code>Constructor()\n    : a(),\n      b()</code></pre>"
+            },
+            {
+                "name": "BinPack",
+                "description": "Bin-pack constructor initializers.\n\n<pre class=\"language-cpp\"><code>Constructor()\n    : aaaaaaaaaaaaaaaaaaaa(), bbbbbbbbbbbbbbbbbbbb(),\n      cccccccccccccccccccc()</code></pre>"
+            },
+            {
+                "name": "CurrentLine",
+                "description": "Put all constructor initializers on the current line if they fit. Otherwise, put each one on its own line.\n\n<pre class=\"language-cpp\"><code>Constructor() : a(), b()\n\nConstructor()\n    : aaaaaaaaaaaaaaaaaaaa(),\n      bbbbbbbbbbbbbbbbbbbb(),\n      ddddddddddddd()</code></pre>"
+            },
+            {
+                "name": "NextLine",
+                "description": "Same as <code>PCIS_CurrentLine</code> except that if all constructor initializers do not fit on the current line, try to fit them on the next line.\n\n<pre class=\"language-cpp\"><code>Constructor() : a(), b()\n\nConstructor()\n    : aaaaaaaaaaaaaaaaaaaa(), bbbbbbbbbbbbbbbbbbbb(), ddddddddddddd()\n\nConstructor()\n    : aaaaaaaaaaaaaaaaaaaa(),\n      bbbbbbbbbbbbbbbbbbbb(),\n      cccccccccccccccccccc()</code></pre>"
+            }
+        ],
+        "category": "Break",
+        "index": 83
     },
     {
         "name": "PenaltyBreakAssignment",
         "type": "unsigned",
         "description": "The penalty for breaking around an assignment operator.",
         "category": "Break",
-        "index": 29
+        "index": 84
     },
     {
         "name": "PenaltyBreakBeforeFirstCallParameter",
         "type": "unsigned",
         "description": "The penalty for breaking a function call after <code>call(</code>.",
         "category": "Break",
-        "index": 30
+        "index": 85
     },
     {
         "name": "PenaltyBreakComment",
         "type": "unsigned",
         "description": "The penalty for each line break introduced inside a comment.",
         "category": "Break",
-        "index": 31
+        "index": 86
     },
     {
         "name": "PenaltyBreakFirstLessLess",
         "type": "unsigned",
         "description": "The penalty for breaking before the first <code><<</code>.",
         "category": "Break",
-        "index": 32
+        "index": 87
     },
     {
         "name": "PenaltyBreakString",
         "type": "unsigned",
         "description": "The penalty for each line break introduced inside a string literal.",
         "category": "Break",
-        "index": 33
+        "index": 88
     },
     {
         "name": "PenaltyBreakTemplateDeclaration",
         "type": "unsigned",
         "description": "The penalty for breaking after template declaration.",
         "category": "Break",
-        "index": 34
+        "index": 89
     },
     {
         "name": "PenaltyExcessCharacter",
         "type": "unsigned",
         "description": "The penalty for each character outside of the column limit.",
         "category": "Break",
-        "index": 35
+        "index": 90
     },
     {
         "name": "PenaltyIndentedWhitespace",
         "type": "unsigned",
         "description": "Penalty for each character of whitespace indentation (counted relative to leading non-whitespace column).",
         "category": "Break",
-        "index": 36
+        "index": 91
     },
     {
         "name": "PenaltyReturnTypeOnItsOwnLine",
         "type": "unsigned",
         "description": "Penalty for putting the return type of a function onto its own line.",
         "category": "Break",
-        "index": 37
+        "index": 92
     },
     {
         "name": "PointerAlignment",
@@ -1145,64 +1245,96 @@
                 "description": "Align pointer in the middle.\n\n<pre class=\"language-cpp\"><code>int * a;</code></pre>"
             }
         ],
-        "category": "Space",
-        "index": 23
+        "category": "Align",
+        "index": 93
+    },
+    {
+        "name": "ReferenceAlignment",
+        "type": "enum",
+        "description": "Reference alignment style (overrides <code>PointerAlignment</code> for references).",
+        "enums": [
+            {
+                "name": "Pointer",
+                "description": "Align reference like <code>PointerAlignment</code>."
+            },
+            {
+                "name": "Left",
+                "description": "Align reference to the left.\n\n<pre class=\"language-cpp\"><code>int&amp; a;</code></pre>"
+            },
+            {
+                "name": "Right",
+                "description": "Align reference to the right.\n\n<pre class=\"language-cpp\"><code>int &amp;a;</code></pre>"
+            },
+            {
+                "name": "Middle",
+                "description": "Align reference in the middle.\n\n<pre class=\"language-cpp\"><code>int &amp; a;</code></pre>"
+            }
+        ],
+        "category": "Align",
+        "index": 94
     },
     {
         "name": "ReflowComments",
         "type": "bool",
         "description": "If <code>true</code>, clang-format will attempt to re-flow comments.\n\n<pre class=\"language-cpp\"><code>false:\n// veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information\n/* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information */\n\ntrue:\n// veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of\n// information\n/* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of\n * information */</code></pre>",
         "category": "Break",
-        "index": 38
+        "index": 95
+    },
+    {
+        "name": "ShortNamespaceLines",
+        "type": "unsigned",
+        "description": "The maximal number of unwrapped lines that a short namespace spans. Defaults to 1. This determines the maximum length of short namespaces by counting unwrapped lines (i.e. containing neither opening nor closing namespace brace) and makes \u201cFixNamespaceComments\u201d omit adding end comments for those.\n\n<pre class=\"language-cpp\"><code>ShortNamespaceLines: 1     vs.     ShortNamespaceLines: 0\nnamespace a {                      namespace a {\n  int foo;                           int foo;\n}                                  } // namespace a\n\nShortNamespaceLines: 1     vs.     ShortNamespaceLines: 0\nnamespace b {                      namespace b {\n  int foo;                           int foo;\n  int bar;                           int bar;\n} // namespace b                   } // namespace b</code></pre>",
+        "category": "Other",
+        "index": 96
     },
     {
         "name": "SortIncludes",
         "type": "enum",
-        "description": "Controls if and how clang-format will sort <code>#includes</code>.",
+        "description": "Controls if and how clang-format will sort <code>#includes</code>. If <code>Never</code>, includes are never sorted. If <code>CaseInsensitive</code>, includes are sorted in an ASCIIbetical or case insensitive fashion. If <code>CaseSensitive</code>, includes are sorted in an alphabetical or case sensitive fashion.",
         "enums": [
             {
                 "name": "Never",
                 "description": "Includes are never sorted.\n\n<pre class=\"language-cpp\"><code>#include &quot;B/A.h&quot;\n#include &quot;A/B.h&quot;\n#include &quot;a/b.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;B/a.h&quot;</code></pre>"
             },
             {
-                "name": "CaseInsensitive",
-                "description": "Includes are sorted in an ASCIIbetical or case insensitive fashion.\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;\n#include &quot;a/b.h&quot;</code></pre>"
+                "name": "CaseSensitive",
+                "description": "Includes are sorted in an ASCIIbetical or case sensitive fashion.\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;\n#include &quot;a/b.h&quot;</code></pre>"
             },
             {
-                "name": "CaseSensitive",
-                "description": "Includes are sorted in an alphabetical or case sensitive fashion.\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;a/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;</code></pre>"
+                "name": "CaseInsensitive",
+                "description": "Includes are sorted in an alphabetical or case insensitive fashion.\n\n<pre class=\"language-cpp\"><code>#include &quot;A/B.h&quot;\n#include &quot;A/b.h&quot;\n#include &quot;a/b.h&quot;\n#include &quot;B/A.h&quot;\n#include &quot;B/a.h&quot;</code></pre>"
             }
         ],
         "category": "Other",
-        "index": 6
+        "index": 97
     },
     {
         "name": "SortUsingDeclarations",
         "type": "bool",
         "description": "If <code>true</code>, clang-format will sort using declarations. The order of using declarations is defined as follows: Split the strings by \u201c::\u201d and discard any initial empty strings. The last element of each list is a non-namespace name; all others are namespace names. Sort the lists of names lexicographically, where the sort order of individual names is that all non-namespace names come before all namespace names, and within those groups, names are in case-insensitive lexicographic order.\n\n<pre class=\"language-cpp\"><code>false:                                 true:\nusing std::cout;               vs.     using std::cin;\nusing std::cin;                        using std::cout;</code></pre>",
         "category": "Other",
-        "index": 7
+        "index": 98
     },
     {
         "name": "SpaceAfterCStyleCast",
         "type": "bool",
         "description": "If <code>true</code>, a space is inserted after C style casts.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\n(int) i;                       vs.     (int)i;</code></pre>",
         "category": "Space",
-        "index": 2
+        "index": 99
     },
     {
         "name": "SpaceAfterLogicalNot",
         "type": "bool",
         "description": "If <code>true</code>, a space is inserted after the logical not operator ( <code>!</code> ).\n\n<pre class=\"language-cpp\"><code>true:                                  false:\n! someExpression();            vs.     !someExpression();</code></pre>",
         "category": "Space",
-        "index": 3
+        "index": 100
     },
     {
         "name": "SpaceAfterTemplateKeyword",
         "type": "bool",
         "description": "If <code>true</code>, a space will be inserted after the \u2018template\u2019 keyword.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\ntemplate &lt;int&gt; void foo();     vs.     template&lt;int&gt; void foo();</code></pre>",
         "category": "Space",
-        "index": 4
+        "index": 101
     },
     {
         "name": "SpaceAroundPointerQualifiers",
@@ -1227,42 +1359,42 @@
             }
         ],
         "category": "Space",
-        "index": 5
+        "index": 102
     },
     {
         "name": "SpaceBeforeAssignmentOperators",
         "type": "bool",
         "description": "If <code>false</code>, spaces will be removed before assignment operators.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nint a = 5;                     vs.     int a= 5;\na += 42;                               a+= 42;</code></pre>",
         "category": "Space",
-        "index": 6
+        "index": 103
     },
     {
         "name": "SpaceBeforeCaseColon",
         "type": "bool",
         "description": "If <code>false</code>, spaces will be removed before case colon.\n\n<pre class=\"language-cpp\"><code>true:                                   false\nswitch (x) {                    vs.     switch (x) {\n  case 1 : break;                         case 1: break;\n}                                       }</code></pre>",
         "category": "Space",
-        "index": 7
+        "index": 104
     },
     {
         "name": "SpaceBeforeCpp11BracedList",
         "type": "bool",
         "description": "If <code>true</code>, a space will be inserted before a C++11 braced list used to initialize an object (after the preceding identifier or type).\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nFoo foo { bar };               vs.     Foo foo{ bar };\nFoo {};                                Foo{};\nvector&lt;int&gt; { 1, 2, 3 };               vector&lt;int&gt;{ 1, 2, 3 };\nnew int[3] { 1, 2, 3 };                new int[3]{ 1, 2, 3 };</code></pre>",
         "category": "Space",
-        "index": 8
+        "index": 105
     },
     {
         "name": "SpaceBeforeCtorInitializerColon",
         "type": "bool",
         "description": "If <code>false</code>, spaces will be removed before constructor initializer colon.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nFoo::Foo() : a(a) {}                   Foo::Foo(): a(a) {}</code></pre>",
         "category": "Space",
-        "index": 9
+        "index": 106
     },
     {
         "name": "SpaceBeforeInheritanceColon",
         "type": "bool",
         "description": "If <code>false</code>, spaces will be removed before inheritance colon.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nclass Foo : Bar {}             vs.     class Foo: Bar {}</code></pre>",
         "category": "Space",
-        "index": 10
+        "index": 107
     },
     {
         "name": "SpaceBeforeParens",
@@ -1278,8 +1410,8 @@
                 "description": "Put a space before opening parentheses only after control statement keywords ( <code>for/if/while...</code> ).\n\n<pre class=\"language-cpp\"><code>void f() {\n  if (true) {\n    f();\n  }\n}</code></pre>"
             },
             {
-                "name": "ControlStatementsExceptForEachMacros",
-                "description": "Same as <code>SBPO_ControlStatements</code> except this option doesn\u2019t apply to ForEach macros. This is useful in projects where ForEach macros are treated as function calls instead of control statements.\n\n<pre class=\"language-cpp\"><code>void f() {\n  Q_FOREACH(...) {\n    f();\n  }\n}</code></pre>"
+                "name": "ControlStatementsExceptControlMacros",
+                "description": "Same as <code>SBPO_ControlStatements</code> except this option doesn\u2019t apply to ForEach and If macros. This is useful in projects where ForEach/If macros are treated as function calls instead of control statements. <code>SBPO_ControlStatementsExceptForEachMacros</code> remains an alias for backward compatibility.\n\n<pre class=\"language-cpp\"><code>void f() {\n  Q_FOREACH(...) {\n    f();\n  }\n}</code></pre>"
             },
             {
                 "name": "NonEmptyParentheses",
@@ -1291,77 +1423,91 @@
             }
         ],
         "category": "Space",
-        "index": 11
+        "index": 108
     },
     {
         "name": "SpaceBeforeRangeBasedForLoopColon",
         "type": "bool",
         "description": "If <code>false</code>, spaces will be removed before range-based for loop colon.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nfor (auto v : values) {}       vs.     for(auto v: values) {}</code></pre>",
         "category": "Space",
-        "index": 12
+        "index": 109
     },
     {
         "name": "SpaceBeforeSquareBrackets",
         "type": "bool",
         "description": "If <code>true</code>, spaces will be before <code>[</code>. Lambdas will not be affected. Only the first <code>[</code> will get a space added.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nint a [5];                    vs.      int a[5];\nint a [5][5];                 vs.      int a[5][5];</code></pre>",
         "category": "Space",
-        "index": 13
+        "index": 110
     },
     {
         "name": "SpaceInEmptyBlock",
         "type": "bool",
         "description": "If <code>true</code>, spaces will be inserted into <code>{}</code>.\n\n<pre class=\"language-cpp\"><code>true:                                false:\nvoid f() { }                   vs.   void f() {}\nwhile (true) { }                     while (true) {}</code></pre>",
         "category": "Space",
-        "index": 14
+        "index": 111
     },
     {
         "name": "SpaceInEmptyParentheses",
         "type": "bool",
         "description": "If <code>true</code>, spaces may be inserted into <code>()</code>.\n\n<pre class=\"language-cpp\"><code>true:                                false:\nvoid f( ) {                    vs.   void f() {\n  int x[] = {foo( ), bar( )};          int x[] = {foo(), bar()};\n  if (true) {                          if (true) {\n    f( );                                f();\n  }                                    }\n}                                    }</code></pre>",
         "category": "Space",
-        "index": 15
+        "index": 112
     },
     {
         "name": "SpacesBeforeTrailingComments",
         "type": "unsigned",
         "description": "The number of spaces before trailing line comments ( <code>//</code> - comments). This does not affect trailing block comments ( <code>/*</code> - comments) as those commonly have different usage patterns and a number of special cases.\n\n<pre class=\"language-cpp\"><code>SpacesBeforeTrailingComments: 3\nvoid f() {\n  if (true) {   // foo1\n    f();        // bar\n  }             // foo\n}</code></pre>",
         "category": "Space",
-        "index": 16
+        "index": 113
     },
     {
         "name": "SpacesInAngles",
-        "type": "bool",
-        "description": "If <code>true</code>, spaces will be inserted after <code><</code> and before <code>></code> in template argument lists.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nstatic_cast&lt; int &gt;(arg);       vs.     static_cast&lt;int&gt;(arg);\nstd::function&lt; void(int) &gt; fct;        std::function&lt;void(int)&gt; fct;</code></pre>",
+        "type": "enum",
+        "description": "The SpacesInAnglesStyle to use for template argument lists.",
+        "enums": [
+            {
+                "name": "Never",
+                "description": "Remove spaces after <code><</code> and before <code>></code>.\n\n<pre class=\"language-cpp\"><code>static_cast&lt;int&gt;(arg);\nstd::function&lt;void(int)&gt; fct;</code></pre>"
+            },
+            {
+                "name": "Always",
+                "description": "Add spaces after <code><</code> and before <code>></code>.\n\n<pre class=\"language-cpp\"><code>static_cast&lt; int &gt;(arg);\nstd::function&lt; void(int) &gt; fct;</code></pre>"
+            },
+            {
+                "name": "Leave",
+                "description": "Keep a single space after <code><</code> and before <code>></code> if any spaces were present. Option <code>Standard: Cpp03</code> takes precedence."
+            }
+        ],
         "category": "Space",
-        "index": 17
+        "index": 114
     },
     {
         "name": "SpacesInCStyleCastParentheses",
         "type": "bool",
         "description": "If <code>true</code>, spaces may be inserted into C style casts.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nx = ( int32 )y                 vs.     x = (int32)y</code></pre>",
         "category": "Space",
-        "index": 18
+        "index": 115
     },
     {
         "name": "SpacesInConditionalStatement",
         "type": "bool",
         "description": "If <code>true</code>, spaces will be inserted around if/for/switch/while conditions.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nif ( a )  { ... }              vs.     if (a) { ... }\nwhile ( i &lt; 5 )  { ... }               while (i &lt; 5) { ... }</code></pre>",
         "category": "Space",
-        "index": 19
+        "index": 116
     },
     {
         "name": "SpacesInParentheses",
         "type": "bool",
         "description": "If <code>true</code>, spaces will be inserted after <code>(</code> and before <code>)</code>.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nt f( Deleted &amp; ) &amp; = delete;   vs.     t f(Deleted &amp;) &amp; = delete;</code></pre>",
         "category": "Space",
-        "index": 20
+        "index": 117
     },
     {
         "name": "SpacesInSquareBrackets",
         "type": "bool",
         "description": "If <code>true</code>, spaces will be inserted after <code>[</code> and before <code>]</code>. Lambdas without arguments or unspecified size array declarations will not be affected.\n\n<pre class=\"language-cpp\"><code>true:                                  false:\nint a[ 5 ];                    vs.     int a[5];\nstd::unique_ptr&lt;int[]&gt; foo() {} // Won&#x27;t be affected</code></pre>",
         "category": "Space",
-        "index": 21
+        "index": 118
     },
     {
         "name": "Standard",
@@ -1398,42 +1544,42 @@
             }
         ],
         "category": "Common",
-        "index": 4
+        "index": 119
     },
     {
         "name": "StatementAttributeLikeMacros",
         "type": "list of string",
         "description": "Macros which are ignored in front of a statement, as if they were an attribute. So that they are not parsed as identifier, for example for Qts emit.\n\n<pre class=\"language-cpp\"><code>AlignConsecutiveDeclarations: true\nStatementAttributeLikeMacros: []\nunsigned char data = &#x27;x&#x27;;\nemit          signal(data); // This is parsed as variable declaration.\n\nAlignConsecutiveDeclarations: true\nStatementAttributeLikeMacros: [emit]\nunsigned char data = &#x27;x&#x27;;\nemit signal(data); // Now it&#x27;s fine again.</code></pre>",
         "category": "Macro",
-        "index": 5
+        "index": 120
     },
     {
         "name": "StatementMacros",
         "type": "list of string",
         "description": "A vector of macros that should be interpreted as complete statements. Typical macros are expressions, and require a semi-colon to be added; sometimes this is not the case, and this allows to make clang-format aware of such cases. For example: Q_UNUSED",
         "category": "Macro",
-        "index": 6
+        "index": 121
     },
     {
         "name": "TabWidth",
         "type": "unsigned",
         "description": "The number of columns used for tab stops.",
         "category": "Indent",
-        "index": 1
+        "index": 122
     },
     {
         "name": "TypenameMacros",
         "type": "list of string",
-        "description": "A vector of macros that should be interpreted as type declarations instead of as function calls. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>STACK_OF(...)</code></pre> In the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>TypenameMacros: [&quot;STACK_OF&quot;, &quot;LIST&quot;]</code></pre> For example: OpenSSL STACK_OF, BSD LIST_ENTRY.",
+        "description": "A vector of macros that should be interpreted as type declarations instead of as function calls. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>STACK_OF(...)</code></pre>\n\nIn the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>TypenameMacros: [&quot;STACK_OF&quot;, &quot;LIST&quot;]</code></pre>\n\nFor example: OpenSSL STACK_OF, BSD LIST_ENTRY.",
         "category": "Macro",
-        "index": 7
+        "index": 123
     },
     {
         "name": "UseCRLF",
         "type": "bool",
         "description": "Use <code>\\r\\n</code> instead of <code>\\n</code> for line breaks. Also used as fallback if <code>DeriveLineEnding</code> is true.",
         "category": "Common",
-        "index": 5
+        "index": 124
     },
     {
         "name": "UseTab",
@@ -1462,13 +1608,13 @@
             }
         ],
         "category": "Indent",
-        "index": 0
+        "index": 125
     },
     {
         "name": "WhitespaceSensitiveMacros",
         "type": "list of string",
-        "description": "A vector of macros which are whitespace-sensitive and should not be touched. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>STRINGIZE(...)</code></pre> In the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>WhitespaceSensitiveMacros: [&quot;STRINGIZE&quot;, &quot;PP_STRINGIZE&quot;]</code></pre> For example: BOOST_PP_STRINGIZE",
+        "description": "A vector of macros which are whitespace-sensitive and should not be touched. These are expected to be macros of the form:\n\n<pre class=\"language-cpp\"><code>STRINGIZE(...)</code></pre>\n\nIn the .clang-format configuration file, this can be configured like:\n\n<pre class=\"language-yaml\"><code>WhitespaceSensitiveMacros: [&quot;STRINGIZE&quot;, &quot;PP_STRINGIZE&quot;]</code></pre>\n\nFor example: BOOST_PP_STRINGIZE",
         "category": "Macro",
-        "index": 8
+        "index": 126
     }
 ]

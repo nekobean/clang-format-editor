@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <h1>Clang Format Editor (Clang 12) version 0.2.0</h1>
+      <h1>Clang Format Editor (Clang 13) version 0.3.0</h1>
+      
     </v-app-bar>
 
     <v-main>
@@ -16,7 +17,7 @@ import ClangFormatEditor from "./components/ClangFormatEditor";
 export default {
   name: "App",
   metaInfo: {
-    title: "Clang Format Editor (compatible with Clang 12)",
+    title: "Clang Format Editor (compatible with Clang 13)",
     titleTemplate: "%s - pystyle"
   },
 
